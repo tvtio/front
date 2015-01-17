@@ -22,5 +22,8 @@
   "homepage": "https://github.com/moviewio/front",
   "dependencies": {
     "express": "^4.11.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10"
   }
 }
