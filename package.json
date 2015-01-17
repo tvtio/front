@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/moviewio/front/issues"
   },
-  "homepage": "https://github.com/moviewio/front"
+  "homepage": "https://github.com/moviewio/front",
+  "dependencies": {
+    "express": "^4.11.0"
+  }
 }
