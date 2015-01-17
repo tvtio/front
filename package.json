@@ -21,7 +21,11 @@
   },
   "homepage": "https://github.com/moviewio/front",
   "dependencies": {
-    "express": "^4.11.0"
+    "express": "^4.11.0",
+    "express-logger": "0.0.3",
+    "express-session": "^1.10.1",
+    "jade": "^1.9.0",
+    "oauth": "^0.9.12"
   },
   "devDependencies": {
     "gulp": "^3.8.10",
