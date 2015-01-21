@@ -4,6 +4,7 @@ var logger = require('express-logger');
 var favicon = require('serve-favicon');
 var servestatic = require('serve-static')
 
+var config = require('./config.json');
 var routes = require('./lib/routes');
 
 var app = express();
@@ -28,7 +29,7 @@ app.get('/logout', routes.authLogout);
 app.get('/auth/twitter', routes.authTwitter);
 app.get('/auth/twitter/callback', routes.authTwitterCallback);
 
-var server = app.listen(process.env.PORT || 8081, function () {
+var server = app.listen(config.port, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('moview.io front listening at http://%s:%s', host, port);
