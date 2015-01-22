@@ -23,6 +23,8 @@ app.use(session({
 }));
 
 app.get('/', routes.index);
+app.get('/about', routes.about);
+
 app.get('/home', routes.home);
 
 app.get('/logout', routes.authLogout);
