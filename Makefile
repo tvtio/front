@@ -1,16 +1,31 @@
 build: clean
 	go build
 
-test: clean build
+test: build
 	go test -v
 
-deps: dist-clean
-	go get -u github.com/moviewio/tmdb
+lint: build
+	golint
 
 clean:
 	go clean
 
-dist-clean:
-	rm -rf pkg src
+deps:
+	# Go tools
+	go get -u github.com/nsf/gocode
+	go get -u golang.org/x/tools/cmd/goimports
+	go get -u github.com/rogpeppe/godef
+	go get -u golang.org/x/tools/cmd/oracle
+	go get -u golang.org/x/tools/cmd/gorename
+	go get -u github.com/golang/lint/golint
+	go get -u github.com/kisielk/errcheck
+	go get -u github.com/jstemmer/gotags
+	# Dependencies
+	go get -u github.com/moviewio/tmdb
+	# Dev dependencies
+	go get -u github.com/stretchr/testify
 
-.PHONY: build test deps clean
+dist-clean: clean
+	rm -rf pkg src bin
+
+.PHONY: build test lint deps clean dist-clean
