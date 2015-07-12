@@ -11,17 +11,7 @@ clean:
 	go clean
 
 deps:
-	# Go tools
-	go get -u github.com/nsf/gocode
-	go get -u golang.org/x/tools/cmd/goimports
-	go get -u github.com/rogpeppe/godef
-	go get -u golang.org/x/tools/cmd/oracle
-	go get -u golang.org/x/tools/cmd/gorename
-	go get -u github.com/golang/lint/golint
-	go get -u github.com/kisielk/errcheck
-	go get -u github.com/jstemmer/gotags
-	# Dependencies
-	go get -u github.com/moviewio/tmdb
+	go get -u github.com/julienschmidt/httprouter
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 
