@@ -1,6 +1,9 @@
 build: clean
 	go build
 
+install: build
+	go install
+
 test: build
 	go test -v
 
@@ -12,6 +15,7 @@ clean:
 
 deps:
 	go get -u github.com/julienschmidt/httprouter
+	go get -u github.com/carbocation/interpose
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 
