@@ -3,6 +3,7 @@ package routes
 import (
 	"log"
 	"net/http"
+	"net/url"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
@@ -12,7 +13,7 @@ import (
 // Search is the /search?q=matrix route
 func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	query := r.URL.Query().Get("q")
-	results, err := tmdb.SearchMovie(query)
+	results, err := tmdb.SearchMovie(url.QueryEscape(query))
 	if err != nil {
 		log.Fatal(err)
 	}

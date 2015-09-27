@@ -31,7 +31,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container search">
             <div class="searchform">
                 <h1>Search results for: <small>{{.Query}}</small></h1>
                 <p class="lead">
@@ -52,25 +52,34 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+              <hr>
+            </div>
         </div>
-        <div class="container">
+        <div class="container results">
             <div class="row">
                 <div class="col-md-12">
-                    {{range .Results.Results}}
                     <ul class="media-list">
+                      {{range .Results.Results}}
                         <li class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                            <a class="pull-left" href="/movie/{{.ID}}">
+                              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+                            </a>
                             <div class="media-body">
-                                <h2 class="media-heading">{{.Title}}</h4>
+                                <h2 class="media-heading">
+                                  <a href="/movie/{{.ID}}">{{.Title}}</a>
+                                </h2>
                                 <p>{{.Overview}}</p>
                             </div>
                         </li>
+                      {{end}}
                     </ul>
-                    {{end}}
                 </div>
             </div>
+            <div class="row">
+              <hr>
+            </div>
         </div>
-        <hr>
         <footer class="section section-primary">
           <div class="container">
             <div class="row">
