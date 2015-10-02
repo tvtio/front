@@ -30,6 +30,7 @@ func main() {
 	router.GET("/tv/:id", routes.TV)
 	router.GET("/person/:id", routes.Person)
 	router.GET("/about", routes.About)
+	router.GET("/login", routes.Login)
 	router.ServeFiles("/css/*filepath", http.Dir("./templates/css"))
 	router.ServeFiles("/js/*filepath", http.Dir("./templates/js"))
 	router.ServeFiles("/img/*filepath", http.Dir("./templates/img"))
