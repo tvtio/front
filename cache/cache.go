@@ -2,13 +2,23 @@ package cache
 
 import (
 	"fmt"
+	"hash/fnv"
 	"io/ioutil"
 	"os"
 )
 
-// IsCached check if a hash is cached
-func IsCached(hash string) bool {
-	filename := "/tmp/tvtio/" + hash
+// Hash returns the hash for an string
+func Hash(str string) (hash string) {
+	h := fnv.New32a()
+	h.Write([]byte(str))
+	sum := h.Sum32()
+	hash = fmt.Sprint(sum)
+	return hash
+}
+
+// IsCached check if a hash is cached on a path
+func IsCached(path string, hash string) bool {
+	filename := path + "/" + hash
 	if _, err := os.Stat(filename); err == nil {
 		fmt.Println("Caché exists : " + filename)
 		return true
@@ -18,16 +28,18 @@ func IsCached(hash string) bool {
 }
 
 // Save saves the content to the caché
-func Save(filename string, payload string) (success bool, err error) {
+func Save(path string, hash string, payload string) (err error) {
+	filename := path + "/" + hash
 	err = ioutil.WriteFile(filename, []byte(payload), 0644)
 	if err != nil {
-		return false, err
+		return err
 	}
-	return true, nil
+	return nil
 }
 
 // Get gets the content from the caché
-func Get(filename string) (data []byte, err error) {
+func Get(path string, hash string) (data []byte, err error) {
+	filename := path + "/" + hash
 	data, err = ioutil.ReadFile(filename)
 	if err != nil {
 		return data, err

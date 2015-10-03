@@ -2,32 +2,43 @@ package catalog
 
 import (
 	"encoding/json"
-	"fmt"
-	"hash/fnv"
 
 	"github.com/tvtio/front/cache"
 	"github.com/tvtio/front/tmdb"
 )
 
+// TODO read path from config.json
+const path = "/Users/raul/Projects/tvt.io/src/github.com/tvtio/front/.cache"
+
+// SearchMovies ...
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
-	h := fnv.New32a()
-	h.Write([]byte(query))
-	sum := h.Sum32()
-	str := fmt.Sprint(sum)
-	filename := "/tmp/tvtio/" + str
-	if cache.IsCached(str) {
-		data, err := cache.Get(filename)
+	// Get a hash
+	hash := cache.Hash(query)
+
+	// Check if it is cached
+	if cache.IsCached(path, hash) {
+
+		// Get the cached result
+		data, err := cache.Get(path, hash)
+		if err != nil {
+			return result, err
+		}
 		err = json.Unmarshal(data, &result)
 		return result, err
 	}
+
+	// Query to the backend
 	result, err = tmdb.SearchMovie(query)
 	if err != nil {
 		return result, err
 	}
+
+	// Cache the result
 	json, err := json.Marshal(result)
 	if err != nil {
 		return result, err
 	}
-	_, err = cache.Save(filename, string(json))
+	err = cache.Save(path, hash, string(json))
+
 	return result, err
 }
