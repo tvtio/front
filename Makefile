@@ -16,6 +16,7 @@ clean:
 deps:
 	go get -u github.com/julienschmidt/httprouter
 	go get -u github.com/carbocation/interpose
+	go get -u github.com/markbates/goth
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 

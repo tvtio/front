@@ -31,6 +31,8 @@ func main() {
 	router.GET("/person/:id", routes.Person)
 	router.GET("/about", routes.About)
 	router.GET("/login", routes.Login)
+	router.GET("/auth/twitter", routes.AuthTwitter)
+	router.GET("/auth/facebook", routes.AuthFacebook)
 	router.ServeFiles("/css/*filepath", http.Dir("./templates/css"))
 	router.ServeFiles("/js/*filepath", http.Dir("./templates/js"))
 	router.ServeFiles("/img/*filepath", http.Dir("./templates/img"))
