@@ -19,7 +19,7 @@ func main() {
 
 	middle := interpose.New()
 	// Using Gorilla framework's combined logger
-	middle.Use(middleware.GorillaLog())
+	// middle.Use(middleware.GorillaLog())
 	//Using Negroni's Gzip functionality
 	middle.Use(middleware.NegroniGzip(gzip.DefaultCompression))
 
@@ -33,6 +33,7 @@ func main() {
 	router.GET("/login", routes.Login)
 	router.GET("/auth/twitter", routes.AuthTwitter)
 	router.GET("/auth/facebook", routes.AuthFacebook)
+	router.GET("/auth/facebook/callback", routes.AuthFacebookCallback)
 	router.ServeFiles("/css/*filepath", http.Dir("./templates/css"))
 	router.ServeFiles("/js/*filepath", http.Dir("./templates/js"))
 	router.ServeFiles("/img/*filepath", http.Dir("./templates/img"))
