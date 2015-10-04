@@ -32,5 +32,23 @@ h2 {
 }
 
 footer {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+footer  h2 {
+  margin-top: 0;
+  padding-top: 0;
+  color: #337AB7;
+}
+
+footer  ul li.lead {
+  color: #337AB7;
+}
+
+.copyright {
   font-size: 0.8em;
+}
+
+.footer-menu {
 }
