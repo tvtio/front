@@ -28,6 +28,7 @@ func Start(configuration config.Configuration) error {
 	router.GET("/tv/:id", routes.TV)
 	router.GET("/person/:id", routes.Person)
 	router.GET("/about", routes.About)
+	router.GET("/policy", routes.Policy)
 	router.GET("/login", routes.Login)
 	router.GET("/logout", routes.Logout)
 	router.GET("/auth/twitter", routes.AuthTwitter)
