@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/img/favicon.png">
-        <title>tvt.io - Search results for : {{.Query}}</title>
+        <title>tvt.io - {{.Person.Name}}</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
@@ -38,50 +38,76 @@
                 </div>
             </div>
         </nav>
-        <div class="container search">
-            <div class="searchform">
-                <h1>Search results for: <small>{{.Query}}</small></h1>
-                <p class="lead">
-                {{.Results.TotalResults}} results found in {{.Results.TotalPages}} pages.
+        <div class="container person">
+            <div class="row">
+              <div class="col-sm-6">
+                <img class="media-object" src="http://image.tmdb.org/t/p/h632/{{.Person.ProfilePath}}" height="632">
+              </div>
+              <div class="col-sm-6">
+                <h1>{{.Person.Name}}</h1>
+                <p>
+                  {{.Person.Biography}}
                 </p>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <form role="form" method="get" action="/search">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" name="q" class="form-control" value="{{.Query}}" placeholder="">
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-success" type="submit">Search</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+              </div>
             </div>
             <div class="row">
               <hr>
             </div>
-        </div>
-        <div class="container results">
             <div class="row">
-                <div class="col-md-12">
-                    <ul class="media-list">
-                      {{range .Results.Results}}
-                        <li class="media">
-                            <a class="pull-left" href="/movie/{{.ID}}">
-                              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
-                            </a>
-                            <div class="media-body">
-                                <h2 class="media-heading">
-                                  <a href="/movie/{{.ID}}">{{.Title}}</a>
-                                </h2>
-                                <p>{{.Overview}}</p>
-                            </div>
-                        </li>
-                      {{end}}
-                    </ul>
-                </div>
+              <div class="col-sm-4">
+                <h3>Information</h3>
+                <p>
+                  <strong>Birthday:</strong> {{.Person.Birthday}}
+                </p>
+                <p>
+                  <strong>Place of birth:</strong> {{.Person.PlaceOfBirth}}
+                </p>
+                <p>
+                  <strong>Defunction:</strong> {{.Person.Deathday}}
+                </p>
+                <p>
+                  <strong>Homepage:</strong> {{.Person.Homepage}}
+                </p>
+                <p>
+                  <strong>Popularity:</strong> {{.Person.Popularity}}
+                </p>
+              </div>
+              <div class="col-sm-4">
+                <h3>TV Cast</h3>
+                <ul class="media-list">
+                  {{range .Person.TvCredits.Cast}}
+                    <li class="media">
+                      <a class="pull-left" href="/tv/{{.ID}}">
+                        <img class="media-object" src="http://image.tmdb.org/t/p/w92/{{.PosterPath}}" width="92">
+                      </a>
+                      <div class="media-body">
+                          <h4 class="media-heading">
+                            <a href="/tv/{{.ID}}">{{.Character}}</a>
+                          </h4>
+                          <p>{{.Name}}</p>
+                      </div>
+                    </li>
+                  {{end}}
+                </ul>
+              </div>
+              <div class="col-sm-4">
+                <h3>Movie Cast</h3>
+                <ul class="media-list">
+                  {{range .Person.MovieCredits.Cast}}
+                    <li class="media">
+                      <a class="pull-left" href="">
+                        <img class="media-object" src="http://image.tmdb.org/t/p/w92/{{.PosterPath}}" width="92">
+                      </a>
+                      <div class="media-body">
+                          <h4 class="media-heading">
+                            <a href="/movie/{{.ID}}">{{.Character}}</a>
+                          </h4>
+                          <p>{{.Title}}</p>
+                      </div>
+                    </li>
+                  {{end}}
+                </ul>
+              </div>
             </div>
             <div class="row">
               <hr>

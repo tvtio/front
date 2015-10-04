@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "port": 8080,
+  "templates": "./templates",
+  "cache": "/Users/raul/Projects/tvt.io/src/github.com/tvtio/front/cache/tvtio"
+}

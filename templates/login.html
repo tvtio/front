@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/img/favicon.png">
-        <title>tvt.io - Search results for : {{.Query}}</title>
+        <title>tvt.io - About</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
@@ -27,60 +27,37 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li>
+                      <li class="active">
                         <a href="/login">Sign-in</a>
                       </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container search">
+        <div class="container">
             <div class="searchform">
-                <h1>Search results for: <small>{{.Query}}</small></h1>
+                <h1>Sign-in</h1>
                 <p class="lead">
-                {{.Results.TotalResults}} results found in {{.Results.TotalPages}} pages.
+                <p class="lead">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                <br>
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                 </p>
                 <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <form role="form" method="get" action="/search">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" name="q" class="form-control" value="{{.Query}}" placeholder="">
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-success" type="submit">Search</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <hr>
-            </div>
-        </div>
-        <div class="container results">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="media-list">
-                      {{range .Results.Results}}
-                        <li class="media">
-                            <a class="pull-left" href="/movie/{{.ID}}">
-                              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
-                            </a>
-                            <div class="media-body">
-                                <h2 class="media-heading">
-                                  <a href="/movie/{{.ID}}">{{.Title}}</a>
-                                </h2>
-                                <p>{{.Overview}}</p>
-                            </div>
-                        </li>
-                      {{end}}
-                    </ul>
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                    <a class="btn btn-primary btn-lg" href="/auth/twitter" role="button"><i class="fa fa-twitter-square"></i> Twitter</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a class="btn btn-primary btn-lg" href="/auth/facebook" role="button"><i class="fa fa-facebook-square"></i> Facebook</a>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
                 </div>
             </div>
             <div class="row">

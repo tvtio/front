@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="/img/favicon.png">
+        <title>tvt.io - {{.Movie.Title}}</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">tvt.io</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li>
+                        <a href="/login">Sign-in</a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container movie">
+            <div class="row">
+              <div class="col-sm-6">
+                <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Movie.BackdropPath}}" width="500">
+              </div>
+              <div class="col-sm-6">
+                <h1>{{.Movie.Title}}</h1>
+                <p>
+                  {{.Movie.Overview}}
+                </p>
+                <p>
+                  <strong>Original Title:</strong> {{.Movie.OriginalTitle}}
+                </p>
+                <p>
+                  <strong>Homepage:</strong> {{.Movie.Homepage}}
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <hr>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <h3>Information</h3>
+                <p>
+                  <strong>Popularity:</strong> {{.Movie.Popularity}}
+                </p>
+                <p>
+                  <strong>Release Date:</strong> {{.Movie.ReleaseDate}}
+                </p>
+                <p>
+                  <strong>Runtime:</strong> {{.Movie.Runtime}}
+                </p>
+                <p>
+                  <strong>Vote Average:</strong> {{.Movie.VoteAverage}}
+                </p>
+                <p>
+                  <strong>Vote Count:</strong> {{.Movie.VoteCount}}
+                </p>
+                <p>
+                  <strong>Budget:</strong> {{.Movie.Budget}}
+                </p>
+                <p>
+                  <strong>Revenue:</strong> {{.Movie.Revenue}}
+                </p>
+              </div>
+              <div class="col-sm-4">
+                <h3>Cast</h3>
+                <ul class="media-list">
+                  {{range .Movie.Credits.Cast}}
+                    <li class="media">
+                      <a class="pull-left" href="">
+                        <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+                      </a>
+                      <div class="media-body">
+                          <h4 class="media-heading">
+                            <a href="/person/{{.ID}}">{{.Character}}</a>
+                          </h4>
+                          <p>{{.Name}}</p>
+                      </div>
+                    </li>
+                  {{end}}
+                </ul>
+              </div>
+              <div class="col-sm-4">
+                <h3>Crew</h3>
+                <ul class="media-list">
+                  {{range .Movie.Credits.Crew}}
+                    <li class="media">
+                      <a class="pull-left" href="">
+                        <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+                      </a>
+                      <div class="media-body">
+                          <h4 class="media-heading">
+                            <a href="/person/{{.ID}}">{{.Name}}</a>
+                          </h4>
+                          <p>{{.Department}} / {{.Job}}</p>
+                      </div>
+                    </li>
+                  {{end}}
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <hr>
+            </div>
+        </div>
+        <footer class="section section-primary">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <p><center>CopyRight &copy; 2015 - tvt.io</center></p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
