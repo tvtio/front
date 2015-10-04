@@ -1,13 +1,16 @@
-build: clean
+build:
 	go build
 
-install: build
+install:
 	go install
 
-test: build
+test:
 	go test -v ./...
 
-lint: build
+cover:
+	go test -v ./... -cover
+
+lint:
 	golint
 
 clean:
