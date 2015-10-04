@@ -8,6 +8,7 @@ import (
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
+	"github.com/tvtio/front/catalog"
 	"github.com/tvtio/front/models"
 	"github.com/tvtio/front/tmdb"
 )
@@ -27,7 +28,7 @@ func Movie(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	id := ps.ByName("id")
-	movie, err := tmdb.GetMovie(id)
+	movie, err := catalog.Movie(id)
 	if err != nil {
 		log.Fatal(err)
 	}

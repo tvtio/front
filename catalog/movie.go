@@ -10,10 +10,43 @@ import (
 // TODO read path from config.json
 const path = "/Users/raul/Projects/tvt.io/src/github.com/tvtio/front/.cache"
 
+// Movie ...
+func Movie(id string) (result tmdb.Movie, err error) {
+	// Get a hash
+	hash := cache.Hash("movie-" + id)
+
+	// Check if it is cached
+	if cache.IsCached(path, hash) {
+
+		// Get the cached result
+		data, err := cache.Get(path, hash)
+		if err != nil {
+			return result, err
+		}
+		err = json.Unmarshal(data, &result)
+		return result, err
+	}
+
+	// Query to the backend
+	result, err = tmdb.GetMovie(id)
+	if err != nil {
+		return result, err
+	}
+
+	// Cache the result
+	json, err := json.Marshal(result)
+	if err != nil {
+		return result, err
+	}
+	err = cache.Save(path, hash, string(json))
+
+	return result, err
+}
+
 // SearchMovies ...
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	// Get a hash
-	hash := cache.Hash(query)
+	hash := cache.Hash("movie-search-" + query)
 
 	// Check if it is cached
 	if cache.IsCached(path, hash) {
@@ -46,7 +79,7 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 // PopularMovies ...
 func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	// Get a hash
-	hash := cache.Hash("popularmovie")
+	hash := cache.Hash("movie-popular")
 
 	// Check if it is cached
 	if cache.IsCached(path, hash) {
