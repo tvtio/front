@@ -1,8 +1,7 @@
-package main
+package server
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/codegangsta/negroni"
@@ -14,14 +13,8 @@ import (
 	"github.com/tvtio/front/routes"
 )
 
-func main() {
-	// Load configuration
-	// TODO: How to share this config with the handlers?
-	configuration, err := config.Load("./config.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
+// Start ...
+func Start(configuration config.Configuration) error {
 	// Setup middleware
 	middle := negroni.Classic()
 	middle.Use(gzip.Gzip(gzip.DefaultCompression))
@@ -50,5 +43,5 @@ func main() {
 
 	// Start server
 	fmt.Println("Listening at " + configuration.ServerURL())
-	log.Fatal(http.ListenAndServe(configuration.ServerAddress(), middle))
+	return http.ListenAndServe(configuration.ServerAddress(), middle)
 }
