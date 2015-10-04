@@ -5,7 +5,7 @@ install: build
 	go install
 
 test: build
-	go test -v
+	go test -v ./...
 
 lint: build
 	golint
