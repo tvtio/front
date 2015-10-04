@@ -14,6 +14,24 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
     <body>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '910962655664722',
+            xfbml      : true,
+            version    : 'v2.4'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Nav -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -50,7 +68,7 @@
         <div class="container movie">
             <div class="row">
               <div class="col-sm-6">
-                <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Movie.BackdropPath}}" width="500">
+                <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Movie.PosterPath}}" width="500">
               </div>
               <div class="col-sm-6">
                 <h1>{{.Movie.Title}}</h1>

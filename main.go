@@ -9,12 +9,16 @@ import (
 )
 
 func main() {
+	// Flags
 	filename := flag.String("config", "./config.json", "Configuration file")
 	flag.Parse()
+
 	// Load configuration
 	configuration, err := config.Load(*filename)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Start server
 	log.Fatal(server.Start(configuration))
 }

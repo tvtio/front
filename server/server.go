@@ -1,14 +1,13 @@
 package server
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/codegangsta/negroni"
 	"github.com/goincremental/negroni-sessions"
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
-	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/tvtio/front/config"
 	"github.com/tvtio/front/routes"
 )
@@ -17,7 +16,6 @@ import (
 func Start(configuration config.Configuration) error {
 	// Setup middleware
 	middle := negroni.Classic()
-	middle.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	store := cookiestore.New([]byte("keyboard cat"))
 	middle.Use(sessions.Sessions("tvtio", store))
@@ -42,6 +40,6 @@ func Start(configuration config.Configuration) error {
 	middle.UseHandler(router)
 
 	// Start server
-	fmt.Println("Listening at " + configuration.ServerURL())
+	log.Println("Listening at " + configuration.ServerURL())
 	return http.ListenAndServe(configuration.ServerAddress(), middle)
 }

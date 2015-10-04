@@ -14,6 +14,24 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
     <body>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '910962655664722',
+            xfbml      : true,
+            version    : 'v2.4'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Nav -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
               <div class="navbar-header">
@@ -47,35 +65,34 @@
               </div>
             </div>
         </nav>
-        <div class="container">
-            <div class="searchform">
-                <h1>Search Movies & TVShows</h1>
-                <p class="lead">
-                Use this document as a way to quickly start any new project.
-                <br>
-                All you get is this text and a mostly barebones HTML document.
-                </p>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <form role="form" method="get" action="/search">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" name="q" class="form-control input-lg" placeholder="">
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-lg btn-primary" type="submit">Search</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
+        <!-- Search Form -->
+        <div class="container-fluid searchform">
+          <h1>Search Movies & TVShows</h1>
+            <p class="lead">
+              Use this document as a way to quickly start any new project.
+              <br>
+              All you get is this text and a mostly barebones HTML document.
+            </p>
+            <div class="row">
+              <div class="col-md-offset-3 col-md-6">
+                <form role="form" method="get" action="/search">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" name="q" class="form-control input-lg" placeholder="">
+                        <span class="input-group-btn">
+                          <a class="btn btn-lg btn-primary" type="submit">Search</a>
+                        </span>
+                      </div>
                     </div>
+                  </form>
                 </div>
-            </div>
+              </div>
             <div class="row">
               <hr>
             </div>
         </div>
         {{ if .User.ID }}
-        <div class="container user">
+        <div class="container-fluid user">
           <div class="row">
             {{.User.ID}} : {{.User.Name}}
           </div>
@@ -86,8 +103,13 @@
         {{end}}
         <div class="container trending">
             <div class="row">
+              <div class="col-md-12">
+                <h2>Most Popular</h2>
+              </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 trending-movies">
-                    <h2>Trending movies:</h2>
+                    <h3>Movies</h3>
                     <ul class="media-list">
                       {{range .PopularMovies.Results}}
                         <li class="media">
@@ -95,9 +117,9 @@
                               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
                             </a>
                             <div class="media-body">
-                                <h3 class="media-heading">
+                                <h4 class="media-heading">
                                   <a href="/movie/{{.ID}}">{{.Title}}</a>
-                                </h3>
+                                </h4>
                                 <p>{{.Overview}}</p>
                             </div>
                         </li>
@@ -105,7 +127,7 @@
                     </ul>
                 </div>
                 <div class="col-md-6 trending-tv">
-                    <h2>Trending tv:</h2>
+                    <h3>TV Shows</h3>
                     <ul class="media-list">
                       {{range .PopularTV.Results}}
                         <li class="media">
@@ -113,9 +135,9 @@
                               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
                             </a>
                             <div class="media-body">
-                                <h3 class="media-heading">
+                                <h4 class="media-heading">
                                   <a href="/tv/{{.ID}}">{{.Name}}</a>
-                                </h3>
+                                </h4>
                                 <p>{{.Overview}}</p>
                             </div>
                         </li>
