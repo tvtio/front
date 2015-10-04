@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 	"net/http"
 	"text/template"
@@ -17,9 +17,15 @@ import (
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	session := sessions.GetSession(r)
 
-	user := session.Get("user").(*models.User)
-
-	fmt.Println("--------------", user)
+	var user models.User
+	userbytes := session.Get("user")
+	if userbytes != nil {
+		f := userbytes.([]byte)
+		err := json.Unmarshal(f, &user)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
 	popularMovies, err := catalog.PopularMovies()
 	if err != nil {
@@ -44,7 +50,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"tvt.io",
 		popularMovies,
 		popularTV,
-		user,
+		&user,
 	}
 	t.Execute(w, context)
 }

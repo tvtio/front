@@ -38,6 +38,7 @@ func main() {
 	router.GET("/person/:id", routes.Person)
 	router.GET("/about", routes.About)
 	router.GET("/login", routes.Login)
+	router.GET("/logout", routes.Logout)
 	router.GET("/auth/twitter", routes.AuthTwitter)
 	router.GET("/auth/facebook", routes.AuthFacebook)
 	router.GET("/auth/facebook/callback", routes.AuthFacebookCallback)

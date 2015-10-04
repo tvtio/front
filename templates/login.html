@@ -31,9 +31,18 @@
                         <li><a href="/about">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="active">
-                        <a href="/login">Sign-in</a>
+                      {{ if .User.ID }}
+                      <li>
+                        <a href="/user/{{.User.ID}}">{{.User.Name}}</a>
                       </li>
+                      <li>
+                        <a href="/logout">Logout</a>
+                      </li>
+                      {{else}}
+                      <li>
+                        <a href="/login">Login</a>
+                      </li>
+                      {{end}}
                     </ul>
                 </div>
             </div>
