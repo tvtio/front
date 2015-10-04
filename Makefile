@@ -11,7 +11,8 @@ cover:
 	go test -v ./... -cover
 
 lint:
-	golint
+	go vet ./...
+	golint ./...
 
 clean:
 	go clean
