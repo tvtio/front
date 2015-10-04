@@ -15,8 +15,9 @@ clean:
 
 deps:
 	go get -u github.com/julienschmidt/httprouter
-	go get -u github.com/carbocation/interpose
-	go get -u github.com/markbates/goth
+	go get -u github.com/codegangsta/negroni
+	go get -u github.com/phyber/negroni-gzip/gzip
+	go get -u github.com/goincremental/negroni-sessions
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 

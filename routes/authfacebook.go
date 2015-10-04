@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"fmt"
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -9,7 +9,9 @@ import (
 
 	"golang.org/x/oauth2"
 
+	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
+	"github.com/tvtio/front/models"
 )
 
 var oauthConfig = &oauth2.Config{ //setup
@@ -40,17 +42,24 @@ func AuthFacebook(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 // AuthFacebookCallback is the /auth/facebook/callback route
 func AuthFacebookCallback(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	session := sessions.GetSession(r)
+
 	code := r.FormValue("code")
 	token, err := oauthConfig.Exchange(oauth2.NoContext, code)
 
 	client := oauthConfig.Client(oauth2.NoContext, token)
-	resp, err := client.Get("https://graph.facebook.com/v2.4/me")
+	resp, err := client.Get("https://graph.facebook.com/v2.4/me?fields=id,name,email,picture{url}")
 	if err != nil {
 		log.Fatal(err)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
-	// Store session
-	fmt.Println(string(body))
+
+	var user models.User
+	err = json.Unmarshal(body, &user)
+	if err != nil {
+		log.Fatal(err)
+	}
+	session.Set("user", user)
 
 	// TODO Store credentials
 	http.Redirect(w, r, "http://localhost:8080/", http.StatusFound)

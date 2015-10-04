@@ -1,14 +1,15 @@
 package main
 
 import (
-	"compress/gzip"
 	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/carbocation/interpose"
-	"github.com/carbocation/interpose/middleware"
+	"github.com/codegangsta/negroni"
+	"github.com/goincremental/negroni-sessions"
+	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
+	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/tvtio/front/config"
 	"github.com/tvtio/front/routes"
 )
@@ -22,11 +23,11 @@ func main() {
 	}
 
 	// Setup middleware
-	middle := interpose.New()
-	// Using Gorilla framework's combined logger
-	// middle.Use(middleware.GorillaLog())
-	// Using Negroni's Gzip functionality
-	middle.Use(middleware.NegroniGzip(gzip.DefaultCompression))
+	middle := negroni.Classic()
+	middle.Use(gzip.Gzip(gzip.DefaultCompression))
+
+	store := cookiestore.New([]byte("keyboard cat"))
+	middle.Use(sessions.Sessions("tvtio", store))
 
 	// Setup router
 	router := httprouter.New()
