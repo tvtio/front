@@ -11,5 +11,5 @@ before_install:
 install:
   - make deps
 script:
-  - go test -v ./... -cover
+  - go get github.com/tvtio/front && go test -v ./... -cover
   - $HOME/gopath/bin/goveralls -service=travis-ci
