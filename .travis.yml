@@ -4,6 +4,13 @@ go:
   - 1.4
   - 1.5
   - tip
-install: make deps
-script: go test -v ./...
-
+before_install:
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/mattn/goveralls
+  - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
+install:
+  - make deps
+  - make dev-deps
+script:
+  - go test -v ./...
+  - $HOME/gopath/bin/goveralls -service=travis-ci
