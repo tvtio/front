@@ -13,6 +13,48 @@ const (
 	baseURL = "http://api.themoviedb.org/3/"
 )
 
+// PopularMovie ...
+func PopularMovie() (result SearchMovieResult, err error) {
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", baseURL+"movie/popular?api_key="+apiKey, nil)
+	req.Header.Add("Accept", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	//fmt.Println(string(body))
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	return result, nil
+}
+
+// PopularTV ...
+func PopularTV() (result SearchTVResult, err error) {
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", baseURL+"tv/popular?api_key="+apiKey, nil)
+	req.Header.Add("Accept", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	//fmt.Println(string(body))
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	return result, nil
+}
+
 // SearchMulti ...
 func SearchMulti(query string) (result SearchMultiResult, err error) {
 	client := &http.Client{}

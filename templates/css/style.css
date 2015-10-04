@@ -1,6 +1,17 @@
 body {
     padding-top: 90px;
 }
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 3.5em;
+}
+
 .searchform {
     text-align: center;
+}
+
+footer {
+  font-size: 0.8em;
 }

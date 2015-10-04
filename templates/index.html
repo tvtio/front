@@ -7,9 +7,10 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/img/favicon.png">
-        <title>tvt.io</title>
+        <title>tvt.io : {{.Title}}</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -49,9 +50,9 @@
                         <form role="form" method="get" action="/search">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" name="q" class="form-control" placeholder="">
+                                    <input type="text" name="q" class="form-control input-lg" placeholder="">
                                     <span class="input-group-btn">
-                                        <a class="btn btn-success" type="submit">Search</a>
+                                        <a class="btn btn-lg btn-success" type="submit">Search</a>
                                     </span>
                                 </div>
                             </div>
@@ -59,13 +60,58 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+              <hr>
+            </div>
         </div>
-        <hr>
+        <div class="container trending">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Trending movies:</h2>
+                    <ul class="media-list">
+                      {{range .PopularMovies.Results}}
+                        <li class="media">
+                            <a class="pull-left" href="/movie/{{.ID}}">
+                              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">
+                                  <a href="/movie/{{.ID}}">{{.Title}}</a>
+                                </h3>
+                                <p>{{.Overview}}</p>
+                            </div>
+                        </li>
+                      {{end}}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h2>Trending tv:</h2>
+                    <ul class="media-list">
+                      {{range .PopularTV.Results}}
+                        <li class="media">
+                            <a class="pull-left" href="/tv/{{.ID}}">
+                              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+                            </a>
+                            <div class="media-body">
+                                <h3 class="media-heading">
+                                  <a href="/tv/{{.ID}}">{{.Name}}</a>
+                                </h3>
+                                <p>{{.Overview}}</p>
+                            </div>
+                        </li>
+                      {{end}}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+              <hr>
+            </div>
+        </div>
         <footer class="section section-primary">
           <div class="container">
             <div class="row">
               <div class="col-sm-12">
-                <p>Footer</p>
+                <p><center>CopyRight &copy; 2015 - tvt.io</center></p>
               </div>
             </div>
           </div>
