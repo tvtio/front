@@ -2,4 +2,5 @@ pkg
 src
 bin
 .cache
+.users
 front

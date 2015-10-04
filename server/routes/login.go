@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -16,14 +16,11 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	session := sessions.GetSession(r)
 
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
+	// Get user
+	userid := fmt.Sprint(session.Get("user"))
+	user, err := models.GetUser(userid)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	t, err := template.ParseFiles("templates/login.html")
@@ -35,7 +32,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		User  *models.User
 	}{
 		"tvt.io",
-		&user,
+		user,
 	}
 	t.Execute(w, context)
 }

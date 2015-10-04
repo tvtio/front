@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -18,14 +18,11 @@ import (
 func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	session := sessions.GetSession(r)
 
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
+	// Get user
+	userid := fmt.Sprint(session.Get("user"))
+	user, err := models.GetUser(userid)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	query := r.URL.Query().Get("q")
@@ -42,7 +39,7 @@ func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"tvt.io",
 		query,
 		results,
-		&user,
+		user,
 	}
 	t, err := template.ParseFiles("templates/search.html")
 	if err != nil {

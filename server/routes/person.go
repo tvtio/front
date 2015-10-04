@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -17,14 +17,11 @@ import (
 func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	session := sessions.GetSession(r)
 
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
+	// Get user
+	userid := fmt.Sprint(session.Get("user"))
+	user, err := models.GetUser(userid)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	id := ps.ByName("id")
@@ -39,7 +36,7 @@ func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}{
 		"tvt.io",
 		person,
-		&user,
+		user,
 	}
 	t, err := template.ParseFiles("templates/person.html")
 	if err != nil {

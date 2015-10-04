@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -15,32 +15,36 @@ import (
 
 // Index is the / route
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	// Get session
 	session := sessions.GetSession(r)
 
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
+	// Get user
+	userid := fmt.Sprint(session.Get("user"))
+	user, err := models.GetUser(userid)
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	// Get popular movies
 	popularMovies, err := catalog.PopularMovies()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// Get popular tv
 	popularTV, err := catalog.PopularTV()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// Build template
 	t, err := template.ParseFiles("templates/index.html")
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Template context
 	context := struct {
 		Title         string
 		PopularMovies tmdb.SearchMovieResult
@@ -50,7 +54,9 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"tvt.io",
 		popularMovies,
 		popularTV,
-		&user,
+		user,
 	}
+
+	// Render template
 	t.Execute(w, context)
 }
