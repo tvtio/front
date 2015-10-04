@@ -1,13 +1,16 @@
-build: clean
+build:
 	go build
 
-install: build
+install:
 	go install
 
-test: build
-	go test -v
+test:
+	go test -v ./...
 
-lint: build
+cover:
+	go test -v ./... -cover
+
+lint:
 	golint
 
 clean:
@@ -18,6 +21,7 @@ deps:
 	go get -u github.com/codegangsta/negroni
 	go get -u github.com/phyber/negroni-gzip/gzip
 	go get -u github.com/goincremental/negroni-sessions
+	go get -u golang.org/x/oauth2
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 

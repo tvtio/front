@@ -2,7 +2,6 @@ package tmdb
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -151,7 +150,7 @@ func GetTV(id string) (result TV, err error) {
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(body))
+	//fmt.Println(string(body))
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)

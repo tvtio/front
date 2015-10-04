@@ -8,12 +8,10 @@ import (
 )
 
 // Hash returns the hash for an string
-func Hash(str string) (hash string) {
+func Hash(input string) (hash string) {
 	h := fnv.New32a()
-	h.Write([]byte(str))
-	sum := h.Sum32()
-	hash = fmt.Sprint(sum)
-	return hash
+	h.Write([]byte(input))
+	return fmt.Sprint(h.Sum32())
 }
 
 // IsCached check if a hash is cached on a path

@@ -31,9 +31,18 @@
                       <li><a href="/about">About</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
+                    {{ if .User.ID }}
                     <li>
-                      <a href="/login">Sign-in</a>
+                      <a href="/user/{{.User.ID}}">{{.User.Name}}</a>
                     </li>
+                    <li>
+                      <a href="/logout">Logout</a>
+                    </li>
+                    {{else}}
+                    <li>
+                      <a href="/login">Login</a>
+                    </li>
+                    {{end}}
                   </ul>
               </div>
             </div>
@@ -62,10 +71,19 @@
                 </div>
             </div>
             <div class="row">
-              {{.User.ID}}
               <hr>
             </div>
         </div>
+        {{ if .User.ID }}
+        <div class="container user">
+          <div class="row">
+            {{.User.ID}} : {{.User.Name}}
+          </div>
+          <div class="row">
+            <hr>
+          </div>
+        </div>
+        {{end}}
         <div class="container trending">
             <div class="row">
                 <div class="col-md-6 trending-movies">
