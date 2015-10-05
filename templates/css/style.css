@@ -11,8 +11,14 @@ h2 {
   font-size: 2.5em;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 .searchform {
     text-align: center;
+    background-color: #f4f4f4;
+    padding-top: 30px;
 }
 
 .searchform form {
@@ -33,7 +39,9 @@ h2 {
 
 footer {
   margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 30px;
+  padding-top: 30px;
+  background-color: #f4f4f4;
 }
 
 footer  h2 {
@@ -42,12 +50,19 @@ footer  h2 {
   color: #337AB7;
 }
 
+footer ul li {
+  line-height: 1.8;
+}
 footer  ul li.lead {
-  color: #337AB7;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .copyright {
+  margin-top: 15px;
+  padding-top: 15px;
   font-size: 0.8em;
+  background-color: #fff;
 }
 
 .footer-menu {
