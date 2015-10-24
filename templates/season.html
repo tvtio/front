@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="/img/favicon.png">
+        <title>tvt.io - {{.Season.Name}}</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    </head>
+    <body>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '910962655664722',
+            xfbml      : true,
+            version    : 'v2.4'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Nav -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">tvt.io</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      {{ if .User }}
+                      <li>
+                        <a href="/user/{{.User.ID}}">{{.User.Name}}</a>
+                      </li>
+                      <li>
+                        <a href="/logout">Logout</a>
+                      </li>
+                      {{else}}
+                      <li>
+                        <a href="/login">Login</a>
+                      </li>
+                      {{end}}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid tv">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Season.PosterPath}}" width="500">
+              </div>
+              <div class="col-sm-6">
+                <h1>{{.Season.Name}}</h1>
+                <p>
+                  {{.Season.Overview}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container season-info">
+          <div class="row">
+            <div class="col-sm-4">
+              <h3>Information</h3>
+              <p>
+                <strong>Air Date:</strong> {{.Season.AirDate}}
+              </p>
+              <p>
+                <strong>Season Number:</strong> {{.Season.SeasonNumber}}
+              </p>
+              <h3>Episodes</h3>
+              <ul class="media-list">
+              {{range .Season.Episodes}}
+                <li class="media">
+                  <a class="pull-left" href="/tv/id/season/snumber/episode/eid">
+                    <img class="media-object" src="http://image.tmdb.org/t/p/w92/{{.StillPath}}" width="92">
+                  </a>
+                  <div class="media-body">
+                      <h4 class="media-heading">
+                        <a href="/tv/id/season/snumber/episode/eid">Episode {{.EpisodeNumber}}</a>
+                      </h4>
+                      <p>{{.Name}}</p>
+                  </div>
+                </li>
+              {{end}}
+              </ul>
+            </div>
+            <div class="col-sm-4">
+              <h3>Cast</h3>
+              <ul class="media-list">
+                {{range .Season.Credits.Cast}}
+                  <li class="media">
+                    <a class="pull-left" href="">
+                      <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                          <a href="/person/{{.ID}}">{{.Character}}</a>
+                        </h4>
+                        <p>{{.Name}}</p>
+                    </div>
+                  </li>
+                {{end}}
+              </ul>
+            </div>
+            <div class="col-sm-4">
+              <h3>Crew</h3>
+              <ul class="media-list">
+                {{range .Season.Credits.Crew}}
+                  <li class="media">
+                    <a class="pull-left" href="">
+                      <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                          <a href="/person/{{.ID}}">{{.Name}}</a>
+                        </h4>
+                        <p>{{.Department}} / {{.Job}}</p>
+                    </div>
+                  </li>
+                {{end}}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <footer class="section section-primary">
+          <div class="container-fluid footer-menu">
+            <div class="row">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <ul class="list-unstyled">
+                      <li class="lead">Sections</li>
+                      <li>
+                        <a href="/">Home</a>
+                      </li>
+                      <li>
+                        <a href="/about">About</a>
+                      </li>
+                      <li>
+                        <a href="/policy">Privacy Policy</a>
+                      </li>
+                      <li>
+                        <a href="/terms">Terms of Use</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3">
+                    <ul class="list-unstyled">
+                      <li class="lead">Help</li>
+                      <li>
+                        <a href="/support">Support</a>
+                      </li>
+                      <li>
+                        <a href="https://github.com/tvtio">Github</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                  <div class="col-md-5">
+                    <h2>tvt.io</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid copyright">
+            <div class="row">
+              <div class="col-sm-12">
+                <p><center>CopyRight &copy; 2015 - tvt.io</center></p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
