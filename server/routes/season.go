@@ -25,6 +25,10 @@ func Season(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	id := ps.ByName("id")
+	tv, err := catalog.TV(id)
+	if err != nil {
+		log.Fatal(err)
+	}
 	snumber := ps.ByName("snumber")
 	season, err := catalog.Season(id, snumber)
 	if err != nil {
@@ -32,10 +36,12 @@ func Season(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	context := struct {
 		Title  string
+		TV     tmdb.TV
 		Season tmdb.Season
 		User   *models.User
 	}{
 		"tvt.io",
+		tv,
 		season,
 		user,
 	}
