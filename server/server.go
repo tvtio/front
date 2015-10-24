@@ -32,6 +32,7 @@ func Start(configuration config.Configuration) error {
 	router.GET("/movie/:id", routes.Movie)
 
 	router.GET("/tv/:id", routes.TV)
+	router.GET("/tv/:id/season/:snumber", routes.Season)
 
 	router.GET("/person/:id", routes.Person)
 

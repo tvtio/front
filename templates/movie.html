@@ -65,7 +65,8 @@
                 </div>
             </div>
         </nav>
-        <div class="container movie">
+        <div class="container-fluid movie">
+          <div class="container">
             <div class="row">
               <div class="col-sm-6">
                 <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Movie.PosterPath}}" width="500">
@@ -83,9 +84,9 @@
                 </p>
               </div>
             </div>
-            <div class="row">
-              <hr>
-            </div>
+          </div>
+        </div>
+        <div class="container movie-info">
             <div class="row">
               <div class="col-sm-4">
                 <h3>Information</h3>
@@ -147,9 +148,6 @@
                   {{end}}
                 </ul>
               </div>
-            </div>
-            <div class="row">
-              <hr>
             </div>
         </div>
         <footer class="section section-primary">

@@ -13,7 +13,10 @@ h2 {
 
 .navbar {
   margin-bottom: 0;
+  border-radius: 0;
 }
+
+/* Search Form */
 
 .searchform {
     text-align: center;
@@ -25,6 +28,47 @@ h2 {
   padding: 30px 0;
 }
 
+/* Movie & TV & Person */
+.movie, .tv, .person, .header-panel, .user {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f4f4f4;
+}
+
+.user {
+  background-color: #e4e4e4;
+  margin-bottom: 10px;
+}
+
+.user h2 {
+  margin-top: 0;
+  padding-bottom: 20px;
+}
+
+.user .rank {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 2.5em;
+
+}
+.user .rank a {
+  color: #95a5a6;
+}
+
+.user .rank .change.up {
+  color: #27ae60;
+}
+
+.user .avatar {
+  background-color: #fff;
+  border: 4px solid #c4c4c4;
+}
+
+.content-panel {
+  padding-top: 30px;
+}
+
+/** TODO **/
 .media-list > li {
     padding-top: 20px;
 }
@@ -37,6 +81,7 @@ h2 {
   margin-right: 10px;
 }
 
+/* Footer */
 footer {
   margin-bottom: 15px;
   margin-top: 30px;

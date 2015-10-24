@@ -158,3 +158,24 @@ func GetTV(id string) (result TV, err error) {
 	}
 	return result, nil
 }
+
+// GetSeason ...
+func GetSeason(id string, snumber string) (result Season, err error) {
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", baseURL+"tv/"+id+"/season/"+snumber+"?api_key="+apiKey+"&append_to_response=credits,external_ids,images,videos", nil)
+	req.Header.Add("Accept", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	//fmt.Println(string(body))
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		log.Fatal(err)
+		return result, err
+	}
+	return result, nil
+}

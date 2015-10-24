@@ -90,11 +90,23 @@
         </div>
         {{ if .User }}
         <div class="container-fluid user">
-          <div class="row">
-            {{.User.ID}} : {{.User.Name}}
-          </div>
-          <div class="row">
-            <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="pull-right rank">
+                  <span class="change up">▲</span> <a char="position" href="">#1</a></span>
+                </div>
+                <h2>{{.User.Name}}</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <img src="http://www.contestofchampions.net/wp-content/themes/The-Boiler-0.1_Vorkshop/images/icon_ddu_off.svg" class="center-block img-circle img-responsive avatar">
+              </div>
+              <div class="col-md-10">
+
+              </div>
+            </div>
           </div>
         </div>
         {{end}}
