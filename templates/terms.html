@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="/img/favicon.png">
-        <title>tvt.io - Terms of Use</title>
-        {{template "css"}}
-    </head>
-    <body>
-      {{template "facebook"}}
-      <!-- Nav -->
-      <nav class="navbar navbar-inverse">
-          <div class="container">
-              <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="/">tvt.io</a>
-              </div>
-              <div id="navbar" class="collapse navbar-collapse">
-                  <ul class="nav navbar-nav">
-                      <li><a href="/">Home</a></li>
-                      <li><a href="/about">About</a></li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                    {{ if .User }}
-                    <li>
-                      <a href="/user/{{.User.ID}}">{{.User.Name}}</a>
-                    </li>
-                    <li>
-                      <a href="/logout">Logout</a>
-                    </li>
-                    {{else}}
-                    <li>
-                      <a href="/login">Login</a>
-                    </li>
-                    {{end}}
-                  </ul>
-              </div>
-          </div>
-      </nav>
-      <div class="container-fluid header-panel">
-        <div class="container">
-          <div class="searchform">
-              <h1>Terms of Use</h1>
-              <p class="lead">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-              <br>
-              Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              </p>
-            </div>
-          </div>
-        </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/img/favicon.png">
+  <title>tvt.io - Terms of Use</title>
+  {{template "css"}}
+</head>
+
+<body>
+  {{template "facebook"}}
+  <!-- Nav -->
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">tvt.io</a>
       </div>
-      <div class="container content-panel">
-        <div class="row">
-          <div class="col-md-12">
-            <p>fooooo bar</p>
-          </div>
-        </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{ if .User }}
+          <li>
+            <a href="/user/{{.User.ID}}">{{.User.Name}}</a>
+          </li>
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+          {{else}}
+          <li>
+            <a href="/login">Login</a>
+          </li>
+          {{end}}
+        </ul>
       </div>
-      {{template "footer"}}
-      {{template "javascript"}}
-  </body>
+    </div>
+  </nav>
+  <div class="container-fluid header-panel">
+    <div class="container">
+      <div class="searchform">
+        <h1>Terms of Use</h1>
+        <p class="lead">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+          <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="container content-panel">
+    <div class="row">
+      <div class="col-md-12">
+        <p>fooooo bar</p>
+      </div>
+    </div>
+  </div>
+  {{template "footer"}} {{template "javascript"}}
+</body>
+
 </html>
