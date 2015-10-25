@@ -10,6 +10,7 @@ type SearchMultiResult struct {
 		ID               int      `json:"id"`
 		MediaType        string   `json:"media_type"`
 		Name             string   `json:"name"`
+		Title            string   `json:"title"`
 		OriginCountry    []string `json:"origin_country"`
 		OriginalLanguage string   `json:"original_language"`
 		OriginalName     string   `json:"original_name"`

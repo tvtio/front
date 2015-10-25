@@ -26,14 +26,14 @@ func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 
 	query := r.URL.Query().Get("q")
-	results, err := catalog.SearchMovies(url.QueryEscape(query))
+	results, err := catalog.SearchMulti(url.QueryEscape(query))
 	if err != nil {
 		log.Fatal(err)
 	}
 	context := struct {
 		Title   string
 		Query   string
-		Results tmdb.SearchMovieResult
+		Results tmdb.SearchMultiResult
 		User    *models.User
 	}{
 		"tvt.io",
