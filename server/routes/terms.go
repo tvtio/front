@@ -25,6 +25,7 @@ func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	t, err := template.ParseFiles(
 		"templates/terms.html",
 		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
 	)
 	if err != nil {

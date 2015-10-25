@@ -41,6 +41,7 @@ func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	t, err := template.ParseFiles(
 		"templates/person.html",
 		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
 	)
 	if err != nil {
