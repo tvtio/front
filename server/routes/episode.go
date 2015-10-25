@@ -52,7 +52,7 @@ func Episode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		episode,
 		user,
 	}
-	t, err := template.ParseFiles("templates/episode.html")
+	t, err := template.ParseFiles("templates/episode.html", "templates/partials/facebook.html")
 	if err != nil {
 		log.Fatal(err)
 	}

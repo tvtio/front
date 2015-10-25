@@ -22,7 +22,7 @@ func Policy(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		log.Fatal(err)
 	}
 
-	t, err := template.ParseFiles("templates/policy.html")
+	t, err := template.ParseFiles("templates/policy.html", "templates/partials/facebook.html")
 	if err != nil {
 		log.Fatal(err)
 	}

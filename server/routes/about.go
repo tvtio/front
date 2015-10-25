@@ -22,7 +22,7 @@ func About(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		log.Fatal(err)
 	}
 
-	t, err := template.ParseFiles("templates/about.html")
+	t, err := template.ParseFiles("templates/about.html", "templates/partials/facebook.html")
 	if err != nil {
 		log.Fatal(err)
 	}

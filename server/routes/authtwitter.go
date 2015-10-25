@@ -28,7 +28,7 @@ func AuthTwitter(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Printf("Visit the URL for the auth dialog: %v", url)
 	http.Redirect(w, r, url, http.StatusFound)
 
-	t, err := template.ParseFiles("templates/login.html")
+	t, err := template.ParseFiles("templates/login.html", "templates/partials/facebook.html")
 	if err != nil {
 		log.Fatal(err)
 	}
