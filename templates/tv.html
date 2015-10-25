@@ -101,7 +101,11 @@
                 {{range .TV.Seasons}}
                   <li class="media">
                     <a class="pull-left" href="/tv/{{$.TV.ID}}/season/{{.SeasonNumber}}">
+                      {{if .PosterPath}}
                       <img class="media-object" src="http://image.tmdb.org/t/p/w92/{{.PosterPath}}" width="92">
+                      {{else}}
+                      <img class="media-object" src="https://placeholdit.imgix.net/~text?w=92&h=130">
+                      {{end}}
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">
