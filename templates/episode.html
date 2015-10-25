@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="/img/favicon.png">
-        <title>tvt.io - {{.TV.Name}} - {{.Season.Name}}</title>
+        <title>tvt.io - {{.Episode.Name}}</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
@@ -72,82 +72,15 @@
                 <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Season.PosterPath}}" width="500">
               </div>
               <div class="col-sm-6">
-                <h1>{{.TV.Name}} {{.Season.Name}}</h1>
+                <h1>{{.Episode.Name}}</h1>
                 <p>
-                  {{.Season.Overview}}
+                  {{.Episode.Overview}}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div class="container season-info">
-          <div class="row">
-            <div class="col-sm-4">
-              <h3>Information</h3>
-              <p>
-                <strong>Homepage:</strong> {{.TV.Homepage}}
-              </p>
-              <p>
-                <strong>Air Date:</strong> {{.Season.AirDate}}
-              </p>
-              <p>
-                <strong>Season Number:</strong> {{.Season.SeasonNumber}}
-              </p>
-              <h3>Episodes</h3>
-              <ul class="media-list">
-              {{range .Season.Episodes}}
-                <li class="media">
-                  <a class="pull-left" href="/tv/{{$.TV.ID}}/season/{{$.Season.SeasonNumber}}/episode/{{.EpisodeNumber}}">
-                    <img class="media-object" src="http://image.tmdb.org/t/p/w92/{{.StillPath}}" width="92">
-                  </a>
-                  <div class="media-body">
-                      <h4 class="media-heading">
-                        <a href="/tv/{{$.TV.ID}}/season/{{$.Season.SeasonNumber}}/episode/{{.EpisodeNumber}}">Episode {{.EpisodeNumber}}</a>
-                      </h4>
-                      <p>{{.Name}}</p>
-                  </div>
-                </li>
-              {{end}}
-              </ul>
-            </div>
-            <div class="col-sm-4">
-              <h3>Cast</h3>
-              <ul class="media-list">
-                {{range .Season.Credits.Cast}}
-                  <li class="media">
-                    <a class="pull-left" href="">
-                      <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                          <a href="/person/{{.ID}}">{{.Character}}</a>
-                        </h4>
-                        <p>{{.Name}}</p>
-                    </div>
-                  </li>
-                {{end}}
-              </ul>
-            </div>
-            <div class="col-sm-4">
-              <h3>Crew</h3>
-              <ul class="media-list">
-                {{range .Season.Credits.Crew}}
-                  <li class="media">
-                    <a class="pull-left" href="">
-                      <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                          <a href="/person/{{.ID}}">{{.Name}}</a>
-                        </h4>
-                        <p>{{.Department}} / {{.Job}}</p>
-                    </div>
-                  </li>
-                {{end}}
-              </ul>
-            </div>
-          </div>
-        </div>
+
         <footer class="section section-primary">
           <div class="container-fluid footer-menu">
             <div class="row">
