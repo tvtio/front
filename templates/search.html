@@ -149,11 +149,16 @@
     <div class="row">
       <nav>
         <ul class="pager">
-          <li class="previous">
-            <a href="#">
-              <span aria-hidden="true">&larr;</span> Older</a>
+          <li class="previous {{if eq .Results.Page 1}}disabled{{end}}">
+            <a href="/search?q={{.Query}}&page={{.Results.Page}}">
+              <span aria-hidden="true">&larr;</span> Older
+            </a>
           </li>
-          <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+          <li class="next {{if ge .Results.Page .Results.TotalPages}}disabled{{end}}">
+            <a href="/search?q={{.Query}}&page={{.Results.Page}}">
+              Newer <span aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
