@@ -28,6 +28,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/facebook.html",
 		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
+		"templates/partials/css.html",
 	)
 	if err != nil {
 		log.Fatal(err)
