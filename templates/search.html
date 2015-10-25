@@ -69,44 +69,53 @@
           </form>
         </div>
       </div>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="active"><a href="/search?q={{.Query}}">All</a></li>
+              <li role="presentation"><a href="/search/movie?q={{.Query}}">Movies</a></li>
+              <li role="presentation"><a href="/search/tv?q={{.Query}}">TV</a></li>
+              <li role="presentation"><a href="/search/person?q={{.Query}}">People</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container results">
     <div class="row">
       <div class="col-md-12">
         <ul class="media-list">
-          {{range .Results.Results}}
-            {{if eq .MediaType "movie"}}
-              <!-- Movie -->
-              <li class="media">
-                <a class="pull-left" href="/movie/{{.ID}}">
-                  <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
-                </a>
-                <div class="media-body">
-                  <h2 class="media-heading">
-                    <a href="/movie/{{.ID}}">{{.Title}}</a>
-                  </h2>
-                  <p>{{.Overview}}</p>
-                </div>
-              </li>
-            {{else if eq .MediaType "tv"}}
-              <!-- TV -->
-              <li class="media">
-                <a class="pull-left" href="/tv/{{.ID}}">
-                  <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
-                </a>
-                <div class="media-body">
-                  <h2 class="media-heading">
-                    <a href="/tv/{{.ID}}">{{.Name}}</a>
-                  </h2>
-                  <p>{{.Overview}}</p>
-                </div>
-              </li>
-            {{else}}
-              <!-- Other -->
-              {{.MediaType}}
-            {{end}}
-          {{end}}
+          {{range .Results.Results}} {{if eq .MediaType "movie"}}
+          <!-- Movie -->
+          <li class="media">
+            <a class="pull-left" href="/movie/{{.ID}}">
+              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+            </a>
+            <div class="media-body">
+              <h2 class="media-heading">
+                <a href="/movie/{{.ID}}">{{.Title}}</a>
+              </h2>
+              <p>{{.Overview}}</p>
+            </div>
+          </li>
+          {{else if eq .MediaType "tv"}}
+          <!-- TV -->
+          <li class="media">
+            <a class="pull-left" href="/tv/{{.ID}}">
+              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+            </a>
+            <div class="media-body">
+              <h2 class="media-heading">
+                <a href="/tv/{{.ID}}">{{.Name}}</a>
+              </h2>
+              <p>{{.Overview}}</p>
+            </div>
+          </li>
+          {{else}}
+          <!-- Other -->
+          {{.MediaType}} {{end}} {{end}}
         </ul>
       </div>
     </div>
