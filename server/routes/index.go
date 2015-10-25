@@ -39,7 +39,11 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 
 	// Build template
-	t, err := template.ParseFiles("templates/index.html", "templates/partials/facebook.html")
+	t, err := template.ParseFiles(
+		"templates/index.html",
+		"templates/partials/facebook.html",
+		"templates/partials/javascript.html",
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
