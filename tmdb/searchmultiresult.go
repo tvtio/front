@@ -5,6 +5,7 @@ type SearchMultiResult struct {
 	Page    int `json:"page"`
 	Results []struct {
 		BackdropPath     string   `json:"backdrop_path"`
+		ProfilePath      string   `json:"profile_path"`
 		FirstAirDate     string   `json:"first_air_date"`
 		GenreIds         []int    `json:"genre_ids"`
 		ID               int      `json:"id"`

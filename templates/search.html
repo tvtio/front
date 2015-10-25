@@ -91,7 +91,11 @@
           <!-- Movie -->
           <li class="media">
             <a class="pull-left" href="/movie/{{.ID}}">
+              {{if .PosterPath}}
               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=154&h=230&bg=e6e6e6" width="154">
+              {{end}}
             </a>
             <div class="media-body">
               <h2 class="media-heading">
@@ -104,7 +108,11 @@
           <!-- TV -->
           <li class="media">
             <a class="pull-left" href="/tv/{{.ID}}">
+              {{if .PosterPath}}
               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=154&h=230&bg=e6e6e6" width="154">
+              {{end}}
             </a>
             <div class="media-body">
               <h2 class="media-heading">
@@ -113,11 +121,41 @@
               <p>{{.Overview}}</p>
             </div>
           </li>
+          {{else if eq .MediaType "person"}}
+          <!-- Person -->
+          <li class="media">
+            <a class="pull-left" href="/person/{{.ID}}">
+              {{if .ProfilePath}}
+              <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.ProfilePath}}" width="154">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=154&h=230&bg=e6e6e6" width="154">
+              {{end}}
+            </a>
+            <div class="media-body">
+              <h2 class="media-heading">
+                <a href="/person/{{.ID}}">{{.Name}}</a>
+              </h2>
+            </div>
+          </li>
           {{else}}
           <!-- Other -->
           {{.MediaType}} {{end}} {{end}}
         </ul>
       </div>
+    </div>
+    <div class="row">
+      <hr/>
+    </div>
+    <div class="row">
+      <nav>
+        <ul class="pager">
+          <li class="previous">
+            <a href="#">
+              <span aria-hidden="true">&larr;</span> Older</a>
+          </li>
+          <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
     </div>
   </div>
   {{template "footer"}} {{template "javascript"}}
