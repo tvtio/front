@@ -52,7 +52,11 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
+          {{if .TV.PosterPath}}
           <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.TV.PosterPath}}" width="500">
+          {{else}}
+          <img class="media-object" src="https://placeholdit.imgix.net/~text?w=500&h=750">
+          {{end}}
         </div>
         <div class="col-sm-6">
           <h1>{{.TV.Name}}</h1>
@@ -106,7 +110,11 @@
           {{range .TV.Credits.Cast}}
           <li class="media">
             <a class="pull-left" href="">
+              {{if .ProfilePath}}
               <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=45&h=60">
+              {{end}}
             </a>
             <div class="media-body">
               <h4 class="media-heading">
@@ -124,7 +132,11 @@
           {{range .TV.Credits.Crew}}
           <li class="media">
             <a class="pull-left" href="">
+              {{if .ProfilePath}}
               <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=45&h=60">
+              {{end}}
             </a>
             <div class="media-body">
               <h4 class="media-heading">
