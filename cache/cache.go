@@ -5,6 +5,7 @@ import (
 	"hash/fnv"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 // Hash returns the hash for an string
@@ -16,7 +17,7 @@ func Hash(input string) (hash string) {
 
 // IsCached check if a hash is cached on a path
 func IsCached(path string, hash string) bool {
-	filename := path + "/" + hash
+	filename := filepath.Join(path, hash)
 	if _, err := os.Stat(filename); err == nil {
 		fmt.Println("Caché exists : " + filename)
 		return true
@@ -27,7 +28,7 @@ func IsCached(path string, hash string) bool {
 
 // Save saves the content to the caché
 func Save(path string, hash string, payload string) (err error) {
-	filename := path + "/" + hash
+	filename := filepath.Join(path, hash)
 	err = ioutil.WriteFile(filename, []byte(payload), 0644)
 	if err != nil {
 		return err
@@ -37,7 +38,7 @@ func Save(path string, hash string, payload string) (err error) {
 
 // Get gets the content from the caché
 func Get(path string, hash string) (data []byte, err error) {
-	filename := path + "/" + hash
+	filename := filepath.Join(path, hash)
 	data, err = ioutil.ReadFile(filename)
 	if err != nil {
 		return data, err
