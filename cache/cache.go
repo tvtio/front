@@ -3,9 +3,10 @@ package cache
 import (
 	"fmt"
 	"hash/fnv"
-	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/repejota/kvson"
 )
 
 // Hash returns the hash for an string
@@ -28,8 +29,11 @@ func IsCached(path string, hash string) bool {
 
 // Save saves the content to the caché
 func Save(path string, hash string, payload string) (err error) {
-	filename := filepath.Join(path, hash)
-	err = ioutil.WriteFile(filename, []byte(payload), 0644)
+	el := kvson.Element{
+		ID:      hash,
+		Payload: []byte(payload),
+	}
+	err = el.Save(path)
 	if err != nil {
 		return err
 	}
@@ -38,10 +42,11 @@ func Save(path string, hash string, payload string) (err error) {
 
 // Get gets the content from the caché
 func Get(path string, hash string) (data []byte, err error) {
+	el := kvson.Element{}
 	filename := filepath.Join(path, hash)
-	data, err = ioutil.ReadFile(filename)
+	el, err = el.Get(filename)
 	if err != nil {
 		return data, err
 	}
-	return data, nil
+	return el.Payload, nil
 }
