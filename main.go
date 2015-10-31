@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
-	"log"
 
 	"github.com/tvtio/front/config"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/server"
 )
 
@@ -16,9 +16,12 @@ func main() {
 	// Load configuration
 	configuration, err := config.Load(*filename)
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 
 	// Start server
-	log.Fatal(server.Start(configuration))
+	err = server.Start(configuration)
+	if err != nil {
+		logger.Fatal(err.Error())
+	}
 }

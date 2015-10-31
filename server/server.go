@@ -1,7 +1,6 @@
 package server
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/codegangsta/negroni"
@@ -9,6 +8,7 @@ import (
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
 	"github.com/tvtio/front/config"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/server/routes"
 )
 
@@ -57,8 +57,9 @@ func Start(configuration config.Configuration) error {
 	// Apply middleware to the router
 	middle.UseHandler(router)
 
-	log.Println("Listening at " + configuration.ServerURL())
+	logger.Info("Listening at " + configuration.ServerURL())
 
 	// Start server
-	return http.ListenAndServe(configuration.ServerAddress(), middle)
+	err := http.ListenAndServe(configuration.ServerAddress(), middle)
+	return err
 }

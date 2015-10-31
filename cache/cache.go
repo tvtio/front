@@ -3,9 +3,11 @@ package cache
 import (
 	"fmt"
 	"hash/fnv"
+	"log"
 	"os"
 	"path/filepath"
 
+	"github.com/mgutz/ansi"
 	"github.com/repejota/kvson"
 )
 
@@ -20,10 +22,10 @@ func Hash(input string) (hash string) {
 func IsCached(path string, hash string) bool {
 	filename := filepath.Join(path, hash)
 	if _, err := os.Stat(filename); err == nil {
-		fmt.Println("Caché exists : " + filename)
+		log.Println(ansi.Color("DEBUG: ", "blue"), "Caché exists : "+filename)
 		return true
 	}
-	fmt.Println("Not cached : " + filename)
+	log.Println(ansi.Color("DEBUG: ", "blue"), "Not cached : "+filename)
 	return false
 }
 

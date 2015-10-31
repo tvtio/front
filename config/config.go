@@ -27,6 +27,9 @@ func (c *Configuration) ServerURL() string {
 // Load loads configuration onfiguration
 func Load(filename string) (configuration Configuration, err error) {
 	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return configuration, err
+	}
 	err = json.Unmarshal(data, &configuration)
 	return configuration, err
 }
