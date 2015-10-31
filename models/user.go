@@ -30,19 +30,3 @@ func (u *User) Save() error {
 	}
 	return cache.Save(path, u.ID, string(b))
 }
-
-// GetUser a user
-func GetUser(id string) (user *User, err error) {
-	if id != "<nil>" {
-		payload, err := cache.Get(path, id)
-		if err != nil {
-			return nil, err
-		}
-		err = json.Unmarshal(payload, &user)
-		if err != nil {
-			return nil, err
-		}
-		return user, nil
-	}
-	return nil, err
-}

@@ -8,6 +8,7 @@ import (
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
+	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/models"
 )
 
@@ -20,7 +21,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	userid := fmt.Sprint(session.Get("user"))
 	user, err := models.GetUser(userid)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(ansi.Color("FATAL: ", "red"), err)
 	}
 
 	t, err := template.ParseFiles(
@@ -31,7 +32,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(ansi.Color("FATAL: ", "red"), err)
 	}
 	context := struct {
 		Title string

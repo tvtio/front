@@ -42,6 +42,8 @@ func Start(configuration config.Configuration) error {
 	router.GET("/terms", routes.Terms)
 	router.GET("/support", routes.Support)
 
+	router.GET("/user/me", routes.UserMe)
+
 	router.GET("/login", routes.Login)
 	router.GET("/logout", routes.Logout)
 	router.GET("/auth/twitter", routes.AuthTwitter)

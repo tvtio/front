@@ -18,6 +18,7 @@ clean:
 	go clean
 
 deps:
+	go get -u github.com/mgutz/ansi/cmd/ansi-mgutz
 	go get -u github.com/julienschmidt/httprouter
 	go get -u github.com/codegangsta/negroni
 	go get -u github.com/phyber/negroni-gzip/gzip

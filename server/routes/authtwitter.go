@@ -9,6 +9,7 @@ import (
 	"golang.org/x/oauth2"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/mgutz/ansi"
 )
 
 // AuthTwitter is the /auth/twitter route
@@ -36,7 +37,7 @@ func AuthTwitter(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(ansi.Color("FATAL: ", "red"), err)
 	}
 	context := struct {
 		Title string

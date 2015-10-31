@@ -12,8 +12,8 @@ import (
 	"github.com/tvtio/front/models"
 )
 
-// Terms is the /policy route
-func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+// UserMe is the /user/me route
+func UserMe(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	session := sessions.GetSession(r)
 
 	// Get user
@@ -24,7 +24,7 @@ func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 
 	t, err := template.ParseFiles(
-		"templates/terms.html",
+		"templates/user.me.html",
 		"templates/partials/facebook.html",
 		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
@@ -37,7 +37,7 @@ func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		Title string
 		User  *models.User
 	}{
-		"tvt.io",
+		"tvt.io - My Profile",
 		user,
 	}
 	t.Execute(w, context)
