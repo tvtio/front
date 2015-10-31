@@ -23,6 +23,7 @@ deps:
 	go get -u github.com/phyber/negroni-gzip/gzip
 	go get -u github.com/goincremental/negroni-sessions
 	go get -u golang.org/x/oauth2
+	go get -u github.com/go-sql-driver/mysql
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 

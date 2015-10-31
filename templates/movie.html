@@ -100,6 +100,10 @@
         <p>
           <strong>Revenue:</strong> {{.Movie.Revenue}}
         </p>
+        <h3>Genres</h3>
+        {{range .Movie.Genres}}
+          <a href="/movie/genre/{{.ID}}"><h3><span class="label label-default">{{.Name}}</span></h3></a>
+        {{end}}
       </div>
       <div class="col-sm-4">
         <h3>Cast</h3>
@@ -115,9 +119,9 @@
             </a>
             <div class="media-body">
               <h4 class="media-heading">
-                <a href="/person/{{.ID}}">{{.Character}}</a>
+                <a href="/person/{{.ID}}">{{.Name}}</a>
               </h4>
-              <p>{{.Name}}</p>
+              <p>as {{.Character}}</p>
             </div>
           </li>
           {{end}}
