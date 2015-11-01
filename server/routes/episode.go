@@ -2,14 +2,13 @@ package routes
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"text/template"
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
-	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/catalog"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/models"
 	"github.com/tvtio/front/tmdb"
 )
@@ -22,23 +21,23 @@ func Episode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	userid := fmt.Sprint(session.Get("user"))
 	user, err := models.GetUser(userid)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 
 	id := ps.ByName("id")
 	tv, err := catalog.TV(id)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	snumber := ps.ByName("snumber")
 	season, err := catalog.Season(id, snumber)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	enumber := ps.ByName("enumber")
 	episode, err := catalog.Episode(id, snumber, enumber)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title   string
@@ -61,7 +60,7 @@ func Episode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	t.Execute(w, context)
 }

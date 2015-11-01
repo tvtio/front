@@ -3,7 +3,6 @@ package routes
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"text/template"
 
@@ -11,7 +10,7 @@ import (
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
-	"github.com/mgutz/ansi"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/models"
 )
 
@@ -37,7 +36,7 @@ func AuthFacebook(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string
@@ -57,14 +56,14 @@ func AuthFacebookCallback(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	client := oauthConfig.Client(oauth2.NoContext, token)
 	resp, err := client.Get("https://graph.facebook.com/v2.4/me?fields=id,name,email,picture{url}")
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 
 	var user models.User
 	err = json.Unmarshal(body, &user)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	user.Credentials = token
 	user.Save()

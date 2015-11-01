@@ -2,14 +2,13 @@ package routes
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"text/template"
 
 	"golang.org/x/oauth2"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/mgutz/ansi"
+	"github.com/tvtio/front/logger"
 )
 
 // AuthTwitter is the /auth/twitter route
@@ -37,7 +36,7 @@ func AuthTwitter(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string

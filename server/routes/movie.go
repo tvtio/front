@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/catalog"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/models"
 	"github.com/tvtio/front/tmdb"
 )
@@ -22,7 +23,7 @@ func Movie(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	userid := fmt.Sprint(session.Get("user"))
 	user, err := models.GetUser(userid)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 
 	id := ps.ByName("id")
@@ -47,7 +48,7 @@ func Movie(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	t.Execute(w, context)
 }

@@ -2,13 +2,12 @@ package routes
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"text/template"
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
-	"github.com/mgutz/ansi"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/models"
 )
 
@@ -20,7 +19,7 @@ func UserMe(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	userid := fmt.Sprint(session.Get("user"))
 	user, err := models.GetUser(userid)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 
 	t, err := template.ParseFiles(
@@ -31,7 +30,7 @@ func UserMe(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string

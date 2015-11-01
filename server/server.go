@@ -60,6 +60,5 @@ func Start(configuration config.Configuration) error {
 	logger.Info("Listening at " + configuration.ServerURL())
 
 	// Start server
-	err := http.ListenAndServe(configuration.ServerAddress(), middle)
-	return err
+	return http.ListenAndServe(configuration.ServerAddress(), middle)
 }

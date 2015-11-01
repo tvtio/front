@@ -3,12 +3,11 @@ package cache
 import (
 	"fmt"
 	"hash/fnv"
-	"log"
 	"os"
 	"path/filepath"
 
-	"github.com/mgutz/ansi"
 	"github.com/repejota/kvson"
+	"github.com/tvtio/front/logger"
 )
 
 // Hash returns the hash for an string
@@ -22,10 +21,10 @@ func Hash(input string) (hash string) {
 func IsCached(path string, hash string) bool {
 	filename := filepath.Join(path, hash)
 	if _, err := os.Stat(filename); err == nil {
-		log.Println(ansi.Color("DEBUG: ", "blue"), "Caché exists : "+filename)
+		logger.Trace("Caché exists : ", filename)
 		return true
 	}
-	log.Println(ansi.Color("DEBUG: ", "blue"), "Not cached : "+filename)
+	logger.Trace("Not cached : ", filename)
 	return false
 }
 
