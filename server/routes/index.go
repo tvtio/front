@@ -56,11 +56,13 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		PopularMovies tmdb.SearchMovieResult
 		PopularTV     tmdb.SearchTVResult
 		User          *models.User
+		BG1           string
 	}{
 		"tvt.io",
 		popularMovies,
 		popularTV,
 		user,
+		popularMovies.Results[0].BackdropPath,
 	}
 
 	// Render template

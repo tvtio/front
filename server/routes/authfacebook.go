@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"text/template"
@@ -11,7 +10,6 @@ import (
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
 	"github.com/tvtio/front/logger"
-	"github.com/tvtio/front/models"
 )
 
 var oauthConfig = &oauth2.Config{ //setup
@@ -60,15 +58,20 @@ func AuthFacebookCallback(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 
-	var user models.User
-	err = json.Unmarshal(body, &user)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
-	user.Credentials = token
-	user.Save()
+	logger.Trace(string(body))
 
-	session.Set("user", user.ID)
+	/*
+			var user models.User
+			err = json.Unmarshal(body, &user)
+			if err != nil {
+				logger.Fatal(err.Error())
+			}
+			user.Credentials = token
+			user.Save()
+
+		session.Set("user", user.ID)
+	*/
+	session.Set("user", 1)
 
 	// TODO Store credentials
 	http.Redirect(w, r, "http://localhost:8080/", http.StatusFound)
