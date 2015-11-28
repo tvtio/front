@@ -49,7 +49,7 @@
     </div>
   </nav>
   <!-- Search Form -->
-  <div class="container-fluid searchform" style="background: #000 url('http://image.tmdb.org/t/p/w1280/{{.BG1}}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+  <div class="container-fluid searchform ibg" style="background: #000 url('http://image.tmdb.org/t/p/w1280/{{.BG1}}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
     <div class="bg"></div>
     <h1>Search Movies & TVShows</h1>
     <p class="lead">
@@ -71,29 +71,6 @@
       </div>
     </div>
   </div>
-
-  {{ if .User }}
-  <div class="container-fluid user">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-right rank">
-            <span class="change up">▲</span> <a char="position" href="">#1</a></span>
-          </div>
-          <h2>{{.User.Name}}</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <img src="{{.User.Picture.Data.URL}}" class="center-block img-circle img-responsive avatar">
-        </div>
-        <div class="col-md-10">
-
-        </div>
-      </div>
-    </div>
-  </div>
-  {{end}}
   <div class="container trending">
     <div class="row">
       <div class="col-md-12">
@@ -105,7 +82,7 @@
         <h3>Movies</h3>
         <ul class="media-list">
           {{range .PopularMovies.Results}}
-          <li class="media">
+          <li class="media movie">
             <a class="pull-left" href="/movie/{{.ID}}">
               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
             </a>
@@ -113,7 +90,6 @@
               <h4 class="media-heading">
                 <a href="/movie/{{.ID}}">{{.Title}}</a>
               </h4>
-              <p>{{.Overview}}</p>
             </div>
           </li>
           {{end}}
@@ -123,7 +99,7 @@
         <h3>TV Shows</h3>
         <ul class="media-list">
           {{range .PopularTV.Results}}
-          <li class="media">
+          <li class="media tv">
             <a class="pull-left" href="/tv/{{.ID}}">
               <img class="media-object" src="http://image.tmdb.org/t/p/w154/{{.PosterPath}}" width="154">
             </a>
@@ -131,7 +107,6 @@
               <h4 class="media-heading">
                 <a href="/tv/{{.ID}}">{{.Name}}</a>
               </h4>
-              <p>{{.Overview}}</p>
             </div>
           </li>
           {{end}}
