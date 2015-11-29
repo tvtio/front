@@ -12,19 +12,27 @@ const (
 	baseURL = "http://api.themoviedb.org/3/"
 )
 
-// PopularMovie ...
-func PopularMovie() (result SearchMovieResult, err error) {
+func fetchContent(url string) (body []byte, err error) {
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"movie/popular?api_key="+apiKey, nil)
+	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("Accept", "application/json")
 	resp, err := client.Do(req)
+
 	if err != nil {
 		log.Fatal(err)
-		return result, err
+		return body, err
 	}
+
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ = ioutil.ReadAll(resp.Body)
+
+	return body, nil
+}
+
+// PopularMovie ...
+func PopularMovie() (result SearchMovieResult, err error) {
+	body, _ := fetchContent(baseURL + "movie/popular?api_key=" + apiKey)
+
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -35,17 +43,8 @@ func PopularMovie() (result SearchMovieResult, err error) {
 
 // PopularTV ...
 func PopularTV() (result SearchTVResult, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"tv/popular?api_key="+apiKey, nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "tv/popular?api_key=" + apiKey)
+
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -56,17 +55,7 @@ func PopularTV() (result SearchTVResult, err error) {
 
 // SearchMulti ...
 func SearchMulti(query string) (result SearchMultiResult, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"search/multi?api_key="+apiKey+"&query="+query, nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "search/multi?api_key=" + apiKey + "&query=" + query)
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -77,17 +66,7 @@ func SearchMulti(query string) (result SearchMultiResult, err error) {
 
 // SearchMovie ...
 func SearchMovie(query string) (result SearchMovieResult, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"search/movie?api_key="+apiKey+"&query="+query, nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "search/movie?api_key=" + apiKey + "&query=" + query)
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -98,38 +77,19 @@ func SearchMovie(query string) (result SearchMovieResult, err error) {
 
 // GetMovie ...
 func GetMovie(id string) (result Movie, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"movie/"+id+"?api_key="+apiKey+"&append_to_response=credits,images", nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "movie/" + id + "?api_key=" + apiKey + "&append_to_response=credits,images")
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
 		return result, err
 	}
+
 	return result, nil
 }
 
 // GetPerson ...
 func GetPerson(id string) (result Person, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"person/"+id+"?api_key="+apiKey+"&append_to_response=movie_credits,tv_credits", nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "person/" + id + "?api_key=" + apiKey + "&append_to_response=movie_credits,tv_credits")
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -140,17 +100,7 @@ func GetPerson(id string) (result Person, err error) {
 
 // GetTV ...
 func GetTV(id string) (result TV, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"tv/"+id+"?api_key="+apiKey+"&append_to_response=credits", nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "tv/" + id + "?api_key=" + apiKey + "&append_to_response=credits")
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -161,17 +111,7 @@ func GetTV(id string) (result TV, err error) {
 
 // GetSeason ...
 func GetSeason(id string, snumber string) (result Season, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"tv/"+id+"/season/"+snumber+"?api_key="+apiKey+"&append_to_response=credits,external_ids,images,videos", nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "tv/" + id + "/season/" + snumber + "?api_key=" + apiKey + "&append_to_response=credits,external_ids,images,videos")
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
@@ -182,17 +122,7 @@ func GetSeason(id string, snumber string) (result Season, err error) {
 
 // GetEpisode ...
 func GetEpisode(id string, snumber string, enumber string) (result Episode, err error) {
-	client := &http.Client{}
-	req, _ := http.NewRequest("GET", baseURL+"tv/"+id+"/season/"+snumber+"/episode/"+enumber+"?api_key="+apiKey+"&append_to_response=credits,external_ids,images,videos", nil)
-	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return result, err
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
+	body, _ := fetchContent(baseURL + "tv/" + id + "/season/" + snumber + "/episode/" + enumber + "?api_key=" + apiKey + "&append_to_response=credits,external_ids,images,videos")
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		log.Fatal(err)
