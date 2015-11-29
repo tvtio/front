@@ -13,6 +13,11 @@ moview.io front end
 - [Creators](#creators)
 - [Copyright and license](#copyright-and-license)
 
+## Installation ( Docker )
+
+Execute `make docker` to build the image. Then execute `make` everytime you
+want to build & start a container.
+
 ## Documentation
 
 Please check the whole Project Documentation repo at:
