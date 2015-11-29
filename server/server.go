@@ -7,7 +7,6 @@ import (
 	"github.com/goincremental/negroni-sessions"
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
-	"github.com/tvtio/front/config"
 	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/server/routes"
 )
@@ -15,7 +14,7 @@ import (
 // Start starts the HTTP Server of the application
 // * Define the routes
 // * Setup middleware engine
-func Start(configuration config.Configuration) error {
+func Start() error {
 
 	// Setup middleware
 	middle := negroni.Classic()
@@ -50,14 +49,14 @@ func Start(configuration config.Configuration) error {
 	router.GET("/auth/facebook", routes.AuthFacebook)
 	router.GET("/auth/facebook/callback", routes.AuthFacebookCallback)
 
-	router.ServeFiles("/css/*filepath", http.Dir(configuration.Templates+"/css"))
-	router.ServeFiles("/js/*filepath", http.Dir(configuration.Templates+"/js"))
-	router.ServeFiles("/img/*filepath", http.Dir(configuration.Templates+"/img"))
+	router.ServeFiles("/css/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/css"))
+	router.ServeFiles("/js/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/js"))
+	router.ServeFiles("/img/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/img"))
 
 	// Apply middleware to the router
 	middle.UseHandler(router)
 
-	logger.Info("Listening at " + configuration.ServerURL())
+	logger.Info("Listening at :8080")
 
 	// Start server
 	return http.ListenAndServe(":8080", middle)

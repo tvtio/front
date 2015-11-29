@@ -17,6 +17,6 @@ RUN go get -u github.com/go-sql-driver/mysql
 RUN go get -u github.com/repejota/kvson
 RUN go get -u github.com/stretchr/testify
 
-ADD entrypoint.sh /entrypoint.sh
+ADD ./docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 80:8080
