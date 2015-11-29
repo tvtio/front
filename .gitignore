@@ -4,3 +4,4 @@ bin
 .cache
 .users
 front
+config.json

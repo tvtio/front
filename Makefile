@@ -25,6 +25,7 @@ deps:
 	go get -u github.com/goincremental/negroni-sessions
 	go get -u golang.org/x/oauth2
 	go get -u github.com/go-sql-driver/mysql
+	go get -u github.com/repejota/kvson
 	# Dev dependencies
 	go get -u github.com/stretchr/testify
 

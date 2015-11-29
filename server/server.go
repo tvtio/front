@@ -60,5 +60,5 @@ func Start(configuration config.Configuration) error {
 	logger.Info("Listening at " + configuration.ServerURL())
 
 	// Start server
-	return http.ListenAndServe(configuration.ServerAddress(), middle)
+	return http.ListenAndServe(":8080", middle)
 }
