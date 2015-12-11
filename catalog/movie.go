@@ -8,7 +8,7 @@ import (
 )
 
 // TODO read path from config.json
-const path = "/go/src/github.com/tvtio/front/.cache"
+const path = "/cache"
 
 // Movie ...
 func Movie(id string) (result tmdb.Movie, err error) {

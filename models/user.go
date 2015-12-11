@@ -8,7 +8,7 @@ import (
 	"github.com/tvtio/front/cache"
 )
 
-const path = "/Users/raul/Projects/tvt.io/src/github.com/tvtio/front/.users"
+const path = "/users"
 
 // User ...
 type User struct {

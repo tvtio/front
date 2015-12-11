@@ -5,8 +5,13 @@ ENV GOPATH /go
 ENV GOBIN /go/bin
 ENV PATH /usr/local/go/bin:/go/bin:$PATH
 
-ADD front $GOBIN/front
+ADD . $GOPATH/src/github.com/tvtio/front
+WORKDIR $GOPATH/src/github.com/tvtio/front
+RUN make deps
+RUN make install
 
-EXPOSE 8080
+VOLUME ["/cache"]
 
-CMD ["front"]
+EXPOSE 80:8080
+
+CMD ["bash"]
