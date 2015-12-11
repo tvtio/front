@@ -39,4 +39,4 @@ docker-run:
 	docker run -p 80:8080 -ti --rm --name front -v `pwd`:/go/src/github.com/tvtio/front docker_front
 
 
-.PHONY: test lint clean install docker docker-run
+.PHONY: test lint clean install docker docker-run deps dev-deps
