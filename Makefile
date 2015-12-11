@@ -1,6 +1,9 @@
 build:
 	go build
 
+build-linux:
+	GOOS=linux GOARCH=amd64 go build
+
 install:
 	go install
 
@@ -29,11 +32,11 @@ deps:
 dev-deps:
 	go get -u github.com/stretchr/testify
 
-docker:
-	docker build -t tvtio -f docker/Dockerfile .
+docker: clean build-linux
+	docker build -t docker_front .
 
 docker-run:
-	docker run -p 80:8080 -ti --rm --name front -v `pwd`:/go/src/github.com/tvtio/front tvtio
+	docker run -p 80:8080 -ti --rm --name front -v `pwd`:/go/src/github.com/tvtio/front docker_front
 
 
 .PHONY: test lint clean install docker docker-run
