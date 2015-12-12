@@ -2,7 +2,6 @@ package routes
 
 import (
 	"io/ioutil"
-	"log"
 	"net/http"
 	"text/template"
 
@@ -10,6 +9,7 @@ import (
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
+	"github.com/tvtio/front/logger"
 )
 
 var oauthConfig = &oauth2.Config{ //setup
@@ -26,9 +26,15 @@ var oauthConfig = &oauth2.Config{ //setup
 func AuthFacebook(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	url := oauthConfig.AuthCodeURL("state", oauth2.AccessTypeOnline)
 	http.Redirect(w, r, url, http.StatusFound)
-	t, err := template.ParseFiles("templates/login.html")
+	t, err := template.ParseFiles(
+		"templates/login.html",
+		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
+		"templates/partials/javascript.html",
+		"templates/partials/css.html",
+	)
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string
@@ -48,11 +54,25 @@ func AuthFacebookCallback(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	client := oauthConfig.Client(oauth2.NoContext, token)
 	resp, err := client.Get("https://graph.facebook.com/v2.4/me?fields=id,name,email,picture{url}")
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	body, err := ioutil.ReadAll(resp.Body)
-	session.Set("user", body)
+
+	logger.Trace(string(body))
+
+	/*
+			var user models.User
+			err = json.Unmarshal(body, &user)
+			if err != nil {
+				logger.Fatal(err.Error())
+			}
+			user.Credentials = token
+			user.Save()
+
+		session.Set("user", user.ID)
+	*/
+	session.Set("user", 1)
 
 	// TODO Store credentials
-	http.Redirect(w, r, "http://localhost:8080/", http.StatusFound)
+	http.Redirect(w, r, "http://192.168.99.101/", http.StatusFound)
 }

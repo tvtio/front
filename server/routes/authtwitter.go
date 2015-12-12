@@ -2,13 +2,13 @@ package routes
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"text/template"
 
 	"golang.org/x/oauth2"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/tvtio/front/logger"
 )
 
 // AuthTwitter is the /auth/twitter route
@@ -28,9 +28,15 @@ func AuthTwitter(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Printf("Visit the URL for the auth dialog: %v", url)
 	http.Redirect(w, r, url, http.StatusFound)
 
-	t, err := template.ParseFiles("templates/login.html")
+	t, err := template.ParseFiles(
+		"templates/login.html",
+		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
+		"templates/partials/javascript.html",
+		"templates/partials/css.html",
+	)
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string

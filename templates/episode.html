@@ -8,12 +8,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="/img/favicon.png">
-  <title>tvt.io - {{.Movie.Title}}</title>
+  <title>tvt.io - {{.TV.Name}} - {{.Season.Name}} - {{.Episode.Name}}</title>
   {{template "css"}}
 </head>
 
 <body>
   {{template "facebook"}}
+  <!-- Nav -->
   <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
@@ -33,69 +34,70 @@
       </div>
     </div>
   </nav>
-  <div class="container-fluid movie ibg" style="background: #000 url('http://image.tmdb.org/t/p/w1280/{{.Movie.BackdropPath}}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-    <div class="bg"></div>
+  <div class="container-fluid tv">
     <div class="container">
       <div class="row">
-        <div class="col-sm-4">
-          {{if .Movie.PosterPath}}
-          <img class="media-object" src="http://image.tmdb.org/t/p/w342/{{.Movie.PosterPath}}">
+        <div class="col-sm-6">
+          {{if .Episode.StillPath}}
+          <img class="media-object" src="http://image.tmdb.org/t/p/w500/{{.Episode.StillPath}}" width="500">
           {{else}}
           <img class="media-object" src="https://placeholdit.imgix.net/~text?w=500&h=750">
           {{end}}
         </div>
-        <div class="col-sm-8">
-          <h1>{{.Movie.Title}}</h1>
+        <div class="col-sm-6">
+          <h1>{{.Episode.Name}}
+            <p>
+              <small>{{.TV.Name}} - {{.Season.Name}}</small>
+            </p>
+          </h1>
           <p>
-            {{.Movie.Overview}}
-          </p>
-          <p>
-            <strong>Tagline:</strong> {{.Movie.Tagline}}
-          </p>
-          <p>
-            <strong>Original Title:</strong> {{.Movie.OriginalTitle}}
-          </p>
-          <p>
-            <strong>Homepage:</strong> {{.Movie.Homepage}}
+            {{.Episode.Overview}}
           </p>
         </div>
       </div>
     </div>
   </div>
-  <div class="container movie-info">
+  <div class="container episode-info">
     <div class="row">
       <div class="col-sm-4">
         <h3>Information</h3>
         <p>
-          <strong>Popularity:</strong> {{.Movie.Popularity}}
+          <strong>Homepage:</strong> {{.TV.Homepage}}
         </p>
         <p>
-          <strong>Release Date:</strong> {{.Movie.ReleaseDate}}
+          <strong>Season Air Date:</strong> {{.Season.AirDate}}
         </p>
         <p>
-          <strong>Runtime:</strong> {{.Movie.Runtime}}
+          <strong>Season Number:</strong> {{.Season.SeasonNumber}}
         </p>
         <p>
-          <strong>Vote Average:</strong> {{.Movie.VoteAverage}} / 10
+          <strong>Episode Air Date:</strong> {{.Episode.AirDate}}
         </p>
         <p>
-          <strong>Vote Count:</strong> {{.Movie.VoteCount}}
+          <strong>Episode Number:</strong> {{.Episode.EpisodeNumber}}
         </p>
-        <p>
-          <strong>Budget:</strong> {{.Movie.Budget}}
-        </p>
-        <p>
-          <strong>Revenue:</strong> {{.Movie.Revenue}}
-        </p>
-        <h3>Genres</h3>
-        {{range .Movie.Genres}}
-          <a href="/movie/genre/{{.ID}}"><h3><span class="label label-default">{{.Name}}</span></h3></a>
-        {{end}}
       </div>
       <div class="col-sm-4">
         <h3>Cast</h3>
         <ul class="media-list">
-          {{range .Movie.Credits.Cast}}
+          {{range .Episode.Credits.Cast}}
+          <li class="media">
+            <a class="pull-left" href="">
+              {{if .ProfilePath}}
+              <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+              {{else}}
+              <img class="media-object" src="https://placeholdit.imgix.net/~text?w=45&h=60">
+              {{end}}
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <a href="/person/{{.ID}}">{{.Character}}</a>
+              </h4>
+              <p>{{.Name}}</p>
+            </div>
+          </li>
+          {{end}}
+          {{range .Episode.Credits.GuestStars}}
           <li class="media">
             <a class="pull-left" href="">
               {{if .ProfilePath}}
@@ -117,7 +119,7 @@
       <div class="col-sm-4">
         <h3>Crew</h3>
         <ul class="media-list">
-          {{range .Movie.Credits.Crew}}
+          {{range .Episode.Credits.Crew}}
           <li class="media">
             <a class="pull-left" href="">
               {{if .ProfilePath}}

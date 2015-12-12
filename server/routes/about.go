@@ -1,40 +1,36 @@
 package routes
 
 import (
-	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"text/template"
 
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
-	"github.com/tvtio/front/models"
+	"github.com/tvtio/front/logger"
 )
 
 // About is the / route
 func About(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	session := sessions.GetSession(r)
 
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
+	// Get user
+	_ = fmt.Sprint(session.Get("user"))
 
-	t, err := template.ParseFiles("templates/about.html")
+	t, err := template.ParseFiles(
+		"templates/about.html",
+		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
+		"templates/partials/javascript.html",
+		"templates/partials/css.html",
+	)
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	context := struct {
 		Title string
-		User  *models.User
 	}{
 		"tvt.io",
-		&user,
 	}
 	t.Execute(w, context)
 }

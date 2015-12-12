@@ -1,5 +1,8 @@
+tags
 pkg
 src
 bin
 .cache
+.users
 front
+config.json

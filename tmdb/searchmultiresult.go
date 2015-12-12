@@ -5,11 +5,13 @@ type SearchMultiResult struct {
 	Page    int `json:"page"`
 	Results []struct {
 		BackdropPath     string   `json:"backdrop_path"`
+		ProfilePath      string   `json:"profile_path"`
 		FirstAirDate     string   `json:"first_air_date"`
 		GenreIds         []int    `json:"genre_ids"`
 		ID               int      `json:"id"`
 		MediaType        string   `json:"media_type"`
 		Name             string   `json:"name"`
+		Title            string   `json:"title"`
 		OriginCountry    []string `json:"origin_country"`
 		OriginalLanguage string   `json:"original_language"`
 		OriginalName     string   `json:"original_name"`

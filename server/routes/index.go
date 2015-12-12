@@ -1,56 +1,51 @@
 package routes
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"text/template"
 
-	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/models"
+	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Index is the / route
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	session := sessions.GetSession(r)
-
-	var user models.User
-	userbytes := session.Get("user")
-	if userbytes != nil {
-		f := userbytes.([]byte)
-		err := json.Unmarshal(f, &user)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
+	// Get popular movies
 	popularMovies, err := catalog.PopularMovies()
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 
+	// Get popular tv
 	popularTV, err := catalog.PopularTV()
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 
-	t, err := template.ParseFiles("templates/index.html")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// Build template
+	t := template.Must(template.ParseFiles(
+		"templates/index.html",
+		"templates/partials/facebook.html",
+		"templates/partials/footer.html",
+		"templates/partials/javascript.html",
+		"templates/partials/css.html",
+	))
+
+	// Template context
 	context := struct {
 		Title         string
 		PopularMovies tmdb.SearchMovieResult
 		PopularTV     tmdb.SearchTVResult
-		User          *models.User
+		BG1           string
 	}{
 		"tvt.io",
 		popularMovies,
 		popularTV,
-		&user,
+		popularMovies.Results[0].BackdropPath,
 	}
+
+	// Render template
 	t.Execute(w, context)
 }
