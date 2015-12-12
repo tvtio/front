@@ -1,31 +1,19 @@
 package routes
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"text/template"
 
-	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
 	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/catalog"
 	"github.com/tvtio/front/logger"
-	"github.com/tvtio/front/models"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Person is the /movie/:id route
 func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	session := sessions.GetSession(r)
-
-	// Get user
-	userid := fmt.Sprint(session.Get("user"))
-	user, err := models.GetUser(userid)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
-
 	id := ps.ByName("id")
 	person, err := catalog.Person(id)
 	if err != nil {
@@ -34,11 +22,9 @@ func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	context := struct {
 		Title  string
 		Person tmdb.Person
-		User   *models.User
 	}{
 		"tvt.io",
 		person,
-		user,
 	}
 	t, err := template.ParseFiles(
 		"templates/person.html",

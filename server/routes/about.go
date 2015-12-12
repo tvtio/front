@@ -8,7 +8,6 @@ import (
 	"github.com/goincremental/negroni-sessions"
 	"github.com/julienschmidt/httprouter"
 	"github.com/tvtio/front/logger"
-	"github.com/tvtio/front/models"
 )
 
 // About is the / route
@@ -16,11 +15,7 @@ func About(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	session := sessions.GetSession(r)
 
 	// Get user
-	userid := fmt.Sprint(session.Get("user"))
-	user, err := models.GetUser(userid)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
+	_ = fmt.Sprint(session.Get("user"))
 
 	t, err := template.ParseFiles(
 		"templates/about.html",
@@ -34,10 +29,8 @@ func About(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 	context := struct {
 		Title string
-		User  *models.User
 	}{
 		"tvt.io",
-		user,
 	}
 	t.Execute(w, context)
 }

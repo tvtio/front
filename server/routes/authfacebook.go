@@ -74,5 +74,5 @@ func AuthFacebookCallback(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	session.Set("user", 1)
 
 	// TODO Store credentials
-	http.Redirect(w, r, "http://localhost:8080/", http.StatusFound)
+	http.Redirect(w, r, "http://192.168.99.101/", http.StatusFound)
 }

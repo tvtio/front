@@ -1,4 +1,4 @@
-build:
+build: tags
 	go build
 
 build-linux:
@@ -32,6 +32,10 @@ deps:
 
 dev-deps:
 	go get -u github.com/stretchr/testify
+	go get -u github.com/jstemmer/gotags
+
+tags:
+	gotags -tag-relative=true -R=true -sort=true -f="tags" -fields=+l .
 
 docker:
 	docker build -t docker_front .

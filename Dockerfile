@@ -7,8 +7,7 @@ ENV PATH /usr/local/go/bin:/go/bin:$PATH
 
 ADD . $GOPATH/src/github.com/tvtio/front
 WORKDIR $GOPATH/src/github.com/tvtio/front
-RUN make deps
-RUN make install
+RUN make deps && make install
 
 VOLUME ["/cache"]
 
