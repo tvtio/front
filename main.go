@@ -5,6 +5,7 @@ import (
 	"github.com/tvtio/front/server"
 )
 
+// CLI entrypoint.
 func main() {
 	// Start server
 	err := server.Start()
