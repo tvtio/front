@@ -11,8 +11,7 @@ tvt.io project front-end repository
 
 ## Installation
 
-Execute `make docker` to build the image. Then execute `make` everytime you
-want to build & start a container.
+Execute `make docker` to build the image. Then execute `make docker-run` everytime you want to start the container.
 
 ## Documentation
 
