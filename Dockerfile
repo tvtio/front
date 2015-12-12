@@ -14,4 +14,4 @@ VOLUME ["/cache"]
 
 EXPOSE 80:8080
 
-CMD ["bash"]
+CMD ["front"]

@@ -1,5 +1,3 @@
-.DEFAULT_GOAL := docker-run
-
 build:
 	go build
 
