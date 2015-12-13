@@ -13,10 +13,10 @@ func Person(id string) (result tmdb.Person, err error) {
 	hash := cache.Hash("person-" + id)
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -35,7 +35,7 @@ func Person(id string) (result tmdb.Person, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 
 	return result, err
 }

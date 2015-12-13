@@ -13,10 +13,10 @@ func Episode(id string, snumber string, enumber string) (result tmdb.Episode, er
 	hash := cache.Hash("tv-" + id + "-season-" + snumber + "-episode-" + enumber)
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -35,7 +35,7 @@ func Episode(id string, snumber string, enumber string) (result tmdb.Episode, er
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 
 	return result, err
 }

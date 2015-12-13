@@ -13,10 +13,10 @@ func TV(id string) (result tmdb.TV, err error) {
 	hash := cache.Hash("tv-" + id)
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -35,7 +35,7 @@ func TV(id string) (result tmdb.TV, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 
 	return result, err
 }
@@ -46,9 +46,9 @@ func PopularTV() (result tmdb.SearchTVResult, err error) {
 	hash := cache.Hash("tv-popular")
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -67,6 +67,6 @@ func PopularTV() (result tmdb.SearchTVResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 	return result, err
 }

@@ -1,6 +1,9 @@
 tvt.io : front
 ==============
 
+* Develop: [![Coverage Status](https://coveralls.io/repos/tvtio/front/badge.svg?branch=develop&service=github)](https://coveralls.io/github/tvtio/front?branch=develop)
+* Master: [![Coverage Status](https://coveralls.io/repos/tvtio/front/badge.svg?branch=master&service=github)](https://coveralls.io/github/tvtio/front?branch=master)
+
 tvt.io project front-end repository
 
 ## Table of contents

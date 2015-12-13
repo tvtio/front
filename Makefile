@@ -30,6 +30,7 @@ deps:
 	go get -u github.com/repejota/kvson
 
 dev-deps:
+	go get -u github.com/golang/lint/golint
 	go get -u github.com/stretchr/testify
 	go get -u github.com/jstemmer/gotags
 
