@@ -24,15 +24,12 @@ func TV(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		"tvt.io",
 		tv,
 	}
-	t, err := template.ParseFiles(
+	t := template.Must(template.ParseFiles(
 		"templates/tv.html",
 		"templates/partials/facebook.html",
 		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
 		"templates/partials/css.html",
-	)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
+	))
 	t.Execute(w, context)
 }
