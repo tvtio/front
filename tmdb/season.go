@@ -1,6 +1,6 @@
 package tmdb
 
-// Season ...
+// Season type represents The Movie's Database TV Show Season
 type Season struct {
 	ID           int    `json:"id"`
 	Name         string `json:"name"`

@@ -1,6 +1,6 @@
 package tmdb
 
-// Person ...
+// Person type represents The Movie's Database Person
 type Person struct {
 	Adult        bool          `json:"adult"`
 	AlsoKnownAs  []interface{} `json:"also_known_as"`

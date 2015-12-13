@@ -1,6 +1,11 @@
 package tmdb
 
-// SearchMultiResult ...
+// SearchMultiResult type represents The Movie's Database multiple media
+// search result.
+//
+// * Search on Movies
+// * Search on TV Shows
+// * Search on Persons
 type SearchMultiResult struct {
 	Page    int `json:"page"`
 	Results []struct {

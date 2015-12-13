@@ -1,6 +1,6 @@
 package tmdb
 
-// Episode ...
+// Episode type represents The Movie's Database TV Shows Episode
 type Episode struct {
 	AirDate string `json:"air_date"`
 	Credits struct {

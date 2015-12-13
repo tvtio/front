@@ -27,7 +27,6 @@ deps:
 	go get -u github.com/phyber/negroni-gzip/gzip
 	go get -u github.com/goincremental/negroni-sessions
 	go get -u golang.org/x/oauth2
-	go get -u github.com/go-sql-driver/mysql
 	go get -u github.com/repejota/kvson
 
 dev-deps:
@@ -42,4 +41,3 @@ docker:
 
 docker-run: docker
 	docker run -p 80:8080 -ti --rm --name front -v `pwd`:/go/src/github.com/tvtio/front docker_front
-

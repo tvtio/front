@@ -1,6 +1,6 @@
 package tmdb
 
-// TV ...
+// TV type represents The Movie's Database TV Show
 type TV struct {
 	BackdropPath string `json:"backdrop_path"`
 	CreatedBy    []struct {

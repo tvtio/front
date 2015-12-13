@@ -14,7 +14,6 @@ install:
   - go get github.com/phyber/negroni-gzip/gzip
   - go get github.com/goincremental/negroni-sessions
   - go get golang.org/x/oauth2
-  - go get github.com/go-sql-driver/mysql
   - go get github.com/repejota/kvson
   - go get github.com/stretchr/testify
 
