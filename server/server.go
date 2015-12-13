@@ -41,14 +41,6 @@ func Start() error {
 	router.GET("/terms", routes.Terms)
 	router.GET("/support", routes.Support)
 
-	router.GET("/user/me", routes.UserMe)
-
-	router.GET("/login", routes.Login)
-	router.GET("/logout", routes.Logout)
-	router.GET("/auth/twitter", routes.AuthTwitter)
-	router.GET("/auth/facebook", routes.AuthFacebook)
-	router.GET("/auth/facebook/callback", routes.AuthFacebookCallback)
-
 	router.ServeFiles("/css/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/css"))
 	router.ServeFiles("/js/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/js"))
 	router.ServeFiles("/img/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/img"))

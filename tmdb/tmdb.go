@@ -17,16 +17,12 @@ func fetchContent(url string) (body []byte, err error) {
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("Accept", "application/json")
 	resp, err := client.Do(req)
-
 	if err != nil {
-		log.Fatal(err)
 		return body, err
 	}
-
 	defer resp.Body.Close()
-	body, _ = ioutil.ReadAll(resp.Body)
-
-	return body, nil
+	body, err = ioutil.ReadAll(resp.Body)
+	return body, err
 }
 
 // PopularMovie ...

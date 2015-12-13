@@ -8,7 +8,7 @@ import (
 	"github.com/tvtio/front/logger"
 )
 
-// Terms is the /policy route
+// Terms is the /terms route
 func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	t, err := template.ParseFiles(
 		"templates/terms.html",

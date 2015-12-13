@@ -1,6 +1,6 @@
 package tmdb
 
-// SearchMovieResult ...
+// SearchMovieResult type represents The Movie's Database Movies search results
 type SearchMovieResult struct {
 	Page    int `json:"page"`
 	Results []struct {

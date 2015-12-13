@@ -1,6 +1,6 @@
 package tmdb
 
-// Movie ...
+// Movie type represents The Movie's Database Movie
 type Movie struct {
 	Adult               bool    `json:"adult"`
 	BackdropPath        string  `json:"backdrop_path"`

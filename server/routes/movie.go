@@ -8,7 +8,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/tmdb"
 )
 
@@ -26,15 +25,12 @@ func Movie(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		"tvt.io",
 		movie,
 	}
-	t, err := template.ParseFiles(
+	t := template.Must(template.ParseFiles(
 		"templates/movie.html",
 		"templates/partials/facebook.html",
 		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
 		"templates/partials/css.html",
-	)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
+	))
 	t.Execute(w, context)
 }

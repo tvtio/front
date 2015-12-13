@@ -7,19 +7,16 @@ import (
 	"github.com/tvtio/front/tmdb"
 )
 
-// TODO read path from config.json
-const path = "/cache"
-
 // Movie ...
 func Movie(id string) (result tmdb.Movie, err error) {
 	// Get a hash
 	hash := cache.Hash("movie-" + id)
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -38,7 +35,7 @@ func Movie(id string) (result tmdb.Movie, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 
 	return result, err
 }
@@ -49,10 +46,10 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	hash := cache.Hash("movie-search-" + query)
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -71,7 +68,7 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 
 	return result, err
 }
@@ -82,9 +79,9 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	hash := cache.Hash("movie-popular")
 
 	// Check if it is cached
-	if cache.IsCached(path, hash) {
+	if cache.IsCached(CachePath, hash) {
 		// Get the cached result
-		data, err := cache.Get(path, hash)
+		data, err := cache.Get(CachePath, hash)
 		if err != nil {
 			return result, err
 		}
@@ -103,6 +100,6 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = cache.Save(path, hash, string(json))
+	err = cache.Save(CachePath, hash, string(json))
 	return result, err
 }
