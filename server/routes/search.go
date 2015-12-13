@@ -27,15 +27,12 @@ func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		query,
 		results,
 	}
-	t, err := template.ParseFiles(
+	t := template.Must(template.ParseFiles(
 		"templates/search.html",
 		"templates/partials/facebook.html",
 		"templates/partials/footer.html",
 		"templates/partials/javascript.html",
 		"templates/partials/css.html",
-	)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
+	))
 	t.Execute(w, context)
 }
