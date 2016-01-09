@@ -1,6 +1,8 @@
 package cache
 
 import (
+	"bytes"
+	"encoding/gob"
 	"fmt"
 	"hash/fnv"
 	"os"
@@ -49,5 +51,11 @@ func Get(path string, hash string) (data []byte, err error) {
 	if err != nil {
 		return data, err
 	}
-	return el.Payload, nil
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err = enc.Encode(el.Payload)
+	if err != nil {
+		return data, err
+	}
+	return buf.Bytes(), nil
 }
