@@ -21,18 +21,18 @@ clean:
 	go clean
 
 deps:
-	go get -u github.com/mgutz/ansi/cmd/ansi-mgutz
-	go get -u github.com/julienschmidt/httprouter
-	go get -u github.com/codegangsta/negroni
-	go get -u github.com/phyber/negroni-gzip/gzip
-	go get -u github.com/goincremental/negroni-sessions
-	go get -u golang.org/x/oauth2
-	go get -u github.com/repejota/kvson
+	go get github.com/mgutz/ansi/cmd/ansi-mgutz
+	go get github.com/julienschmidt/httprouter
+	go get github.com/codegangsta/negroni
+	go get github.com/phyber/negroni-gzip/gzip
+	go get github.com/goincremental/negroni-sessions
+	go get golang.org/x/oauth2
+	go get github.com/repejota/kvson
 
 dev-deps:
-	go get -u github.com/golang/lint/golint
-	go get -u github.com/stretchr/testify
-	go get -u github.com/jstemmer/gotags
+	go get github.com/golang/lint/golint
+	go get github.com/stretchr/testify
+	go get github.com/jstemmer/gotags
 
 tags:
 	gotags -tag-relative=true -R=true -sort=true -f="tags" -fields=+l .
