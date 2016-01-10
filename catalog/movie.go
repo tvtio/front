@@ -5,26 +5,24 @@
 package catalog
 
 import (
-	"log"
-
 	"github.com/repejota/cache"
+	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // Movie ...
 func Movie(id string) (result tmdb.Movie, err error) {
+	l := logger.New("default")
+
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		l.Errorf(err.Error())
 	}
 	key := c.CreateKey("movie-" + id)
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,25 +31,24 @@ func Movie(id string) (result tmdb.Movie, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
 
 // SearchMovies ...
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
+	l := logger.New("default")
+
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		l.Errorf(err.Error())
 	}
 	key := c.CreateKey("movie-search-" + query)
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -60,25 +57,24 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
 
 // PopularMovies ...
 func PopularMovies() (result tmdb.SearchMovieResult, err error) {
+	l := logger.New("default")
+
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		l.Errorf(err.Error())
 	}
 	key := c.CreateKey("movie-popular")
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -87,7 +83,7 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }

@@ -5,26 +5,24 @@
 package catalog
 
 import (
-	"log"
-
 	"github.com/repejota/cache"
+	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // Season ...
 func Season(id string, snumber string) (result tmdb.Season, err error) {
+	l := logger.New("default")
+
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		l.Errorf(err.Error())
 	}
 	key := c.CreateKey("tv-" + id + "-season-" + snumber)
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,7 +31,7 @@ func Season(id string, snumber string) (result tmdb.Season, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
