@@ -4,17 +4,9 @@
 
 package main
 
-import (
-	"github.com/repejota/logger"
-)
-
-// CLI entrypoint.
 func main() {
-	l := logger.New("default")
-
-	// Start server
 	err := Start()
 	if err != nil {
-		l.Errorf(err.Error())
+		panic(err)
 	}
 }
