@@ -8,17 +8,14 @@ import (
 	"fmt"
 
 	"github.com/repejota/cache"
-	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // Movie ...
 func Movie(id string) (result tmdb.Movie, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey(fmt.Sprintf("movie-%s", id))
 
@@ -40,11 +37,9 @@ func Movie(id string) (result tmdb.Movie, err error) {
 
 // SearchMovies ...
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey(fmt.Sprintf("movie-search-%s", query))
 
@@ -66,11 +61,9 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 
 // PopularMovies ...
 func PopularMovies() (result tmdb.SearchMovieResult, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey("movie-popular")
 

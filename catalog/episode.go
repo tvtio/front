@@ -8,17 +8,14 @@ import (
 	"fmt"
 
 	"github.com/repejota/cache"
-	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // Episode ...
 func Episode(id string, snumber string, enumber string) (result tmdb.Episode, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey(fmt.Sprintf("tv-%s-season-%s-episode-%s", id, snumber, enumber))
 

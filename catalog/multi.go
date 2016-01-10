@@ -8,17 +8,14 @@ import (
 	"fmt"
 
 	"github.com/repejota/cache"
-	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // SearchMulti ...
 func SearchMulti(query string) (result tmdb.SearchMultiResult, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey(fmt.Sprintf("multi-search-%s", query))
 

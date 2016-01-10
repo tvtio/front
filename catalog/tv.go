@@ -8,17 +8,14 @@ import (
 	"fmt"
 
 	"github.com/repejota/cache"
-	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
 )
 
 // TV ...
 func TV(id string) (result tmdb.TV, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey(fmt.Sprintf("tv-%s", id))
 
@@ -40,11 +37,9 @@ func TV(id string) (result tmdb.TV, err error) {
 
 // PopularTV ...
 func PopularTV() (result tmdb.SearchTVResult, err error) {
-	l := logger.New("default")
-
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		l.Errorf(err.Error())
+		return result, err
 	}
 	key := c.CreateKey("tv-popular")
 
