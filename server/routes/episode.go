@@ -11,7 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/tmdb"
+	"github.com/tvtio/tmdb"
 )
 
 // Episode is the /tv/:id/season/:sid/episode/:enumber route

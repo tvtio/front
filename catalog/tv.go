@@ -8,7 +8,7 @@ import (
 	"log"
 
 	"github.com/repejota/cache"
-	"github.com/tvtio/front/tmdb"
+	"github.com/tvtio/tmdb"
 )
 
 // TV ...

@@ -31,6 +31,7 @@ deps: dev-deps
 	go get golang.org/x/oauth2
 	go get github.com/repejota/cache
 	go get github.com/repejota/logger
+	go get github.com/tvtio/tmdb
 
 dev-deps:
 	go get github.com/golang/lint/golint

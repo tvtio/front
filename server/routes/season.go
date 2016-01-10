@@ -11,7 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/tmdb"
+	"github.com/tvtio/tmdb"
 )
 
 // Season is the /tv/:id/season/:sid route

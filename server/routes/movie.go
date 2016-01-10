@@ -12,7 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mgutz/ansi"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/tmdb"
+	"github.com/tvtio/tmdb"
 )
 
 // Movie is the /movie/:id route
