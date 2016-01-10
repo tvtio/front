@@ -5,6 +5,8 @@
 package catalog
 
 import (
+	"fmt"
+
 	"github.com/repejota/cache"
 	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
@@ -18,7 +20,7 @@ func Season(id string, snumber string) (result tmdb.Season, err error) {
 	if err != nil {
 		l.Errorf(err.Error())
 	}
-	key := c.CreateKey("tv-" + id + "-season-" + snumber)
+	key := c.CreateKey(fmt.Sprintf("tv-%s-season-%s", id, snumber))
 
 	// Check if it is cached
 	if c.IsCached(key) {

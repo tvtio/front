@@ -5,6 +5,8 @@
 package catalog
 
 import (
+	"fmt"
+
 	"github.com/repejota/cache"
 	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
@@ -18,7 +20,7 @@ func SearchMulti(query string) (result tmdb.SearchMultiResult, err error) {
 	if err != nil {
 		l.Errorf(err.Error())
 	}
-	key := c.CreateKey("multi-search-" + query)
+	key := c.CreateKey(fmt.Sprintf("multi-search-%s", query))
 
 	// Check if it is cached
 	if c.IsCached(key) {

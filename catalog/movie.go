@@ -5,6 +5,8 @@
 package catalog
 
 import (
+	"fmt"
+
 	"github.com/repejota/cache"
 	"github.com/repejota/logger"
 	"github.com/tvtio/tmdb"
@@ -18,7 +20,7 @@ func Movie(id string) (result tmdb.Movie, err error) {
 	if err != nil {
 		l.Errorf(err.Error())
 	}
-	key := c.CreateKey("movie-" + id)
+	key := c.CreateKey(fmt.Sprintf("movie-%s", id))
 
 	// Check if it is cached
 	if c.IsCached(key) {
@@ -44,7 +46,7 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		l.Errorf(err.Error())
 	}
-	key := c.CreateKey("movie-search-" + query)
+	key := c.CreateKey(fmt.Sprintf("movie-search-%s", query))
 
 	// Check if it is cached
 	if c.IsCached(key) {
