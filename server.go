@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package server
+package main
 
 import (
 	"net/http"
@@ -12,7 +12,7 @@ import (
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
 	"github.com/repejota/logger"
-	"github.com/tvtio/front/server/routes"
+	"github.com/tvtio/front/routes"
 )
 
 // Start starts the HTTP Server of the application
