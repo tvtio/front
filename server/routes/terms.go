@@ -5,11 +5,13 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/tvtio/front/logger"
+	"github.com/repejota/logger"
 )
 
 // Terms is the /terms route
 func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	l := logger.New("default")
+
 	t, err := template.ParseFiles(
 		"templates/terms.html",
 		"templates/partials/facebook.html",
@@ -18,7 +20,7 @@ func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"templates/partials/css.html",
 	)
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 	context := struct {
 		Title string

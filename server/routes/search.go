@@ -6,17 +6,19 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Search is the /search?q=matrix route
 func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	l := logger.New("default")
+
 	query := r.URL.Query().Get("q")
 	results, err := catalog.SearchMulti(url.QueryEscape(query))
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 	context := struct {
 		Title   string
