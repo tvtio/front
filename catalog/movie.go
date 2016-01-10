@@ -28,7 +28,7 @@ func Movie(id string) (result tmdb.Movie, err error) {
 		return result, err
 	}
 
-	// Query to the backend
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.GetMovie(id)
 	if err != nil {
 		return result, err
@@ -55,7 +55,7 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 		return result, err
 	}
 
-	// Query to the backend
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.SearchMovie(query)
 	if err != nil {
 		return result, err
@@ -82,7 +82,7 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 		return result, err
 	}
 
-	// Query to the backend
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.PopularMovie()
 	if err != nil {
 		return result, err

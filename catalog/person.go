@@ -28,7 +28,7 @@ func Person(id string) (result tmdb.Person, err error) {
 		return result, err
 	}
 
-	// Query to the backend
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.GetPerson(id)
 	if err != nil {
 		return result, err

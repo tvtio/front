@@ -5,22 +5,24 @@
 package routes
 
 import (
-	"log"
 	"net/http"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/mgutz/ansi"
+	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
 	"github.com/tvtio/tmdb"
 )
 
 // Person is the /movie/:id route
 func Person(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	l := logger.New("default")
+
 	id := ps.ByName("id")
 	person, err := catalog.Person(id)
 	if err != nil {
-		log.Fatal(ansi.Color("FATAL: ", "red"), err)
+		l.Errorf(ansi.Color("FATAL: ", "red"), err)
 	}
 	context := struct {
 		Title  string
