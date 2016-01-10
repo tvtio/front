@@ -5,23 +5,25 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Index is the / route
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	l := logger.New("default")
+
 	// Get popular movies
 	popularMovies, err := catalog.PopularMovies()
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 
 	// Get popular tv
 	popularTV, err := catalog.PopularTV()
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 
 	// Build template

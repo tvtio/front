@@ -30,6 +30,7 @@ deps: dev-deps
 	go get github.com/goincremental/negroni-sessions
 	go get golang.org/x/oauth2
 	go get github.com/repejota/cache
+	go get github.com/repejota/logger
 
 dev-deps:
 	go get github.com/golang/lint/golint

@@ -5,27 +5,29 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
-	"github.com/tvtio/front/logger"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Episode is the /tv/:id/season/:sid/episode/:enumber route
 func Episode(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	l := logger.New("default")
+
 	id := params.ByName("id")
 	tv, err := catalog.TV(id)
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 	snumber := params.ByName("snumber")
 	season, err := catalog.Season(id, snumber)
 	if err != nil {
-		logger.Fatal(err.Error())
+		logger.New("default").Errorf(err.Error())
 	}
 	enumber := params.ByName("enumber")
 	episode, err := catalog.Episode(id, snumber, enumber)
 	if err != nil {
-		logger.Fatal(err.Error())
+		l.Errorf(err.Error())
 	}
 	context := struct {
 		Title   string

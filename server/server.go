@@ -7,7 +7,7 @@ import (
 	"github.com/goincremental/negroni-sessions"
 	"github.com/goincremental/negroni-sessions/cookiestore"
 	"github.com/julienschmidt/httprouter"
-	"github.com/tvtio/front/logger"
+	"github.com/repejota/logger"
 	"github.com/tvtio/front/server/routes"
 )
 
@@ -15,6 +15,7 @@ import (
 // * Define the routes
 // * Setup middleware engine
 func Start() error {
+	l := logger.New("default")
 
 	// Setup middleware
 	middle := negroni.Classic()
@@ -48,7 +49,7 @@ func Start() error {
 	// Apply middleware to the router
 	middle.UseHandler(router)
 
-	logger.Info("Listening at :8080")
+	l.Infof("Listening at :8080")
 
 	// Start server
 	return http.ListenAndServe(":8080", middle)
