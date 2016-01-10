@@ -79,8 +79,8 @@
           {{range .Person.TvCredits.Cast}}
           <li class="media">
             <a class="pull-left" href="/tv/{{.ID}}">
-              {{if .ProfilePath}}
-              <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+              {{if .PosterPath}}
+              <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.PosterPath}}" width="45">
               {{else}}
               <img class="media-object" src="https://placeholdit.imgix.net/~text?w=45&h=60">
               {{end}}
@@ -101,15 +101,15 @@
           {{range .Person.MovieCredits.Cast}}
           <li class="media">
             <a class="pull-left" href="">
-              {{if .ProfilePath}}
-              <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.ProfilePath}}" width="45">
+              {{if .PosterPath}}
+              <img class="media-object" src="http://image.tmdb.org/t/p/w45/{{.PosterPath}}" width="45">
               {{else}}
               <img class="media-object" src="https://placeholdit.imgix.net/~text?w=45&h=60">
               {{end}}
             </a>
             <div class="media-body">
               <h4 class="media-heading">
-                <a href="/person/{{.ID}}">{{.Name}}</a>
+                <a href="/movie/{{.ID}}">{{.Title}}</a>
               </h4>
               <p>as {{.Character}}</p>
             </div>
@@ -117,9 +117,6 @@
           {{end}}
         </ul>
       </div>
-    </div>
-    <div class="row">
-      <hr>
     </div>
   </div>
   {{template "footer"}}
