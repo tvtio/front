@@ -1,41 +1,34 @@
 package catalog
 
 import (
-	"encoding/json"
+	"log"
 
-	"github.com/tvtio/front/cache"
+	"github.com/repejota/cache"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Episode ...
 func Episode(id string, snumber string, enumber string) (result tmdb.Episode, err error) {
-	// Get a hash
-	hash := cache.Hash("tv-" + id + "-season-" + snumber + "-episode-" + enumber)
+	c, err := cache.NewCache(CachePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	key := c.CreateKey("tv-" + id + "-season-" + snumber + "-episode-" + enumber)
 
 	// Check if it is cached
-	if cache.IsCached(CachePath, hash) {
-
-		// Get the cached result
-		data, err := cache.Get(CachePath, hash)
+	if c.IsCached(key) {
+		err := c.Load(key, &result)
 		if err != nil {
 			return result, err
 		}
-		err = json.Unmarshal(data, &result)
 		return result, err
 	}
 
-	// Query to the backend
 	result, err = tmdb.GetEpisode(id, snumber, enumber)
 	if err != nil {
 		return result, err
 	}
-
-	// Cache the result
-	json, err := json.Marshal(result)
-	if err != nil {
-		return result, err
-	}
-	err = cache.Save(CachePath, hash, string(json))
+	err = c.Save(key, result)
 
 	return result, err
 }

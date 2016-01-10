@@ -1,26 +1,26 @@
 package catalog
 
 import (
-	"encoding/json"
+	"log"
 
-	"github.com/tvtio/front/cache"
+	"github.com/repejota/cache"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Movie ...
 func Movie(id string) (result tmdb.Movie, err error) {
-	// Get a hash
-	hash := cache.Hash("movie-" + id)
+	c, err := cache.NewCache(CachePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	key := c.CreateKey("movie-" + id)
 
 	// Check if it is cached
-	if cache.IsCached(CachePath, hash) {
-
-		// Get the cached result
-		data, err := cache.Get(CachePath, hash)
+	if c.IsCached(key) {
+		err := c.Load(key, &result)
 		if err != nil {
 			return result, err
 		}
-		err = json.Unmarshal(data, &result)
 		return result, err
 	}
 
@@ -29,31 +29,25 @@ func Movie(id string) (result tmdb.Movie, err error) {
 	if err != nil {
 		return result, err
 	}
-
-	// Cache the result
-	json, err := json.Marshal(result)
-	if err != nil {
-		return result, err
-	}
-	err = cache.Save(CachePath, hash, string(json))
+	err = c.Save(key, result)
 
 	return result, err
 }
 
 // SearchMovies ...
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
-	// Get a hash
-	hash := cache.Hash("movie-search-" + query)
+	c, err := cache.NewCache(CachePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	key := c.CreateKey("movie-search-" + query)
 
 	// Check if it is cached
-	if cache.IsCached(CachePath, hash) {
-
-		// Get the cached result
-		data, err := cache.Get(CachePath, hash)
+	if c.IsCached(key) {
+		err := c.Load(key, &result)
 		if err != nil {
 			return result, err
 		}
-		err = json.Unmarshal(data, &result)
 		return result, err
 	}
 
@@ -62,30 +56,25 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-
-	// Cache the result
-	json, err := json.Marshal(result)
-	if err != nil {
-		return result, err
-	}
-	err = cache.Save(CachePath, hash, string(json))
+	err = c.Save(key, result)
 
 	return result, err
 }
 
 // PopularMovies ...
 func PopularMovies() (result tmdb.SearchMovieResult, err error) {
-	// Get a hash
-	hash := cache.Hash("movie-popular")
+	c, err := cache.NewCache(CachePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	key := c.CreateKey("movie-popular")
 
 	// Check if it is cached
-	if cache.IsCached(CachePath, hash) {
-		// Get the cached result
-		data, err := cache.Get(CachePath, hash)
+	if c.IsCached(key) {
+		err := c.Load(key, &result)
 		if err != nil {
 			return result, err
 		}
-		err = json.Unmarshal(data, &result)
 		return result, err
 	}
 
@@ -94,12 +83,7 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
+	err = c.Save(key, result)
 
-	// Cache the result
-	json, err := json.Marshal(result)
-	if err != nil {
-		return result, err
-	}
-	err = cache.Save(CachePath, hash, string(json))
 	return result, err
 }
