@@ -1,12 +1,6 @@
 package models
 
-import (
-	"encoding/json"
-
-	"golang.org/x/oauth2"
-
-	"github.com/tvtio/front/cache"
-)
+import "golang.org/x/oauth2"
 
 const path = "/users"
 
@@ -20,13 +14,4 @@ type User struct {
 		} `json:"data"`
 	} `json:"picture"`
 	Credentials *oauth2.Token `json:"credentials"`
-}
-
-// Save user
-func (u *User) Save() error {
-	b, err := json.Marshal(u)
-	if err != nil {
-		return err
-	}
-	return cache.Save(path, u.ID, string(b))
 }

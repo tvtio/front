@@ -1,4 +1,4 @@
-build: tags
+build:
 	go build
 
 build-linux:
@@ -8,10 +8,12 @@ install:
 	go install
 
 test:
-	go test -v ./...
+	go test -v -race ./...
 
 cover:
-	go test -v ./... -cover
+	go test -v -race  ./... -coverprofile=coverage.out
+	goveralls -v -coverprofile=coverage.out -service=circle-ci -repotoken=8iNDEAQvVLpWexMuIMz9Nd8CXrVhLMJ5z
+	rm coverage.out
 
 lint:
 	go vet ./...
@@ -20,14 +22,14 @@ lint:
 clean:
 	go clean
 
-deps:
+deps: dev-deps
 	go get github.com/mgutz/ansi/cmd/ansi-mgutz
 	go get github.com/julienschmidt/httprouter
 	go get github.com/codegangsta/negroni
 	go get github.com/phyber/negroni-gzip/gzip
 	go get github.com/goincremental/negroni-sessions
 	go get golang.org/x/oauth2
-	go get github.com/repejota/kvson
+	go get github.com/repejota/cache
 
 dev-deps:
 	go get github.com/golang/lint/golint

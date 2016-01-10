@@ -1,26 +1,26 @@
 package catalog
 
 import (
-	"encoding/json"
+	"log"
 
-	"github.com/tvtio/front/cache"
+	"github.com/repejota/cache"
 	"github.com/tvtio/front/tmdb"
 )
 
 // Person ...
 func Person(id string) (result tmdb.Person, err error) {
-	// Get a hash
-	hash := cache.Hash("person-" + id)
+	c, err := cache.NewCache(CachePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	key := c.CreateKey("person-" + id)
 
 	// Check if it is cached
-	if cache.IsCached(CachePath, hash) {
-
-		// Get the cached result
-		data, err := cache.Get(CachePath, hash)
+	if c.IsCached(key) {
+		err := c.Load(key, &result)
 		if err != nil {
 			return result, err
 		}
-		err = json.Unmarshal(data, &result)
 		return result, err
 	}
 
@@ -29,13 +29,7 @@ func Person(id string) (result tmdb.Person, err error) {
 	if err != nil {
 		return result, err
 	}
-
-	// Cache the result
-	json, err := json.Marshal(result)
-	if err != nil {
-		return result, err
-	}
-	err = cache.Save(CachePath, hash, string(json))
+	err = c.Save(key, result)
 
 	return result, err
 }
