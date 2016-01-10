@@ -5,7 +5,7 @@
 package catalog
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/repejota/cache"
 	"github.com/tvtio/tmdb"
@@ -15,16 +15,13 @@ import (
 func Episode(id string, snumber string, enumber string) (result tmdb.Episode, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
-	key := c.CreateKey("tv-" + id + "-season-" + snumber + "-episode-" + enumber)
+	key := c.CreateKey(fmt.Sprintf("tv-%s-season-%s-episode-%s", id, snumber, enumber))
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,7 +30,7 @@ func Episode(id string, snumber string, enumber string) (result tmdb.Episode, er
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }

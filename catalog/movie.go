@@ -5,7 +5,7 @@
 package catalog
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/repejota/cache"
 	"github.com/tvtio/tmdb"
@@ -15,16 +15,13 @@ import (
 func Movie(id string) (result tmdb.Movie, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
-	key := c.CreateKey("movie-" + id)
+	key := c.CreateKey(fmt.Sprintf("movie-%s", id))
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,7 +30,7 @@ func Movie(id string) (result tmdb.Movie, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
@@ -42,16 +39,13 @@ func Movie(id string) (result tmdb.Movie, err error) {
 func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
-	key := c.CreateKey("movie-search-" + query)
+	key := c.CreateKey(fmt.Sprintf("movie-search-%s", query))
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -60,7 +54,7 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
@@ -69,16 +63,13 @@ func SearchMovies(query string) (result tmdb.SearchMovieResult, err error) {
 func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
 	key := c.CreateKey("movie-popular")
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -87,7 +78,7 @@ func PopularMovies() (result tmdb.SearchMovieResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }

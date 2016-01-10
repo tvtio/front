@@ -5,7 +5,7 @@
 package catalog
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/repejota/cache"
 	"github.com/tvtio/tmdb"
@@ -15,16 +15,13 @@ import (
 func Person(id string) (result tmdb.Person, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
-	key := c.CreateKey("person-" + id)
+	key := c.CreateKey(fmt.Sprintf("person-%s", id))
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,7 +30,7 @@ func Person(id string) (result tmdb.Person, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }

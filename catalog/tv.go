@@ -5,7 +5,7 @@
 package catalog
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/repejota/cache"
 	"github.com/tvtio/tmdb"
@@ -15,16 +15,13 @@ import (
 func TV(id string) (result tmdb.TV, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
-	key := c.CreateKey("tv-" + id)
+	key := c.CreateKey(fmt.Sprintf("tv-%s", id))
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -33,7 +30,7 @@ func TV(id string) (result tmdb.TV, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }
@@ -42,16 +39,13 @@ func TV(id string) (result tmdb.TV, err error) {
 func PopularTV() (result tmdb.SearchTVResult, err error) {
 	c, err := cache.NewCache(CachePath)
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
 	key := c.CreateKey("tv-popular")
 
 	// Check if it is cached
 	if c.IsCached(key) {
 		err := c.Load(key, &result)
-		if err != nil {
-			return result, err
-		}
 		return result, err
 	}
 
@@ -60,7 +54,7 @@ func PopularTV() (result tmdb.SearchTVResult, err error) {
 	if err != nil {
 		return result, err
 	}
-	err = c.Save(key, result)
+	go c.Save(key, result)
 
 	return result, err
 }

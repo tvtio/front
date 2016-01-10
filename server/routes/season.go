@@ -22,11 +22,15 @@ func Season(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	tv, err := catalog.TV(id)
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	snumber := ps.ByName("snumber")
 	season, err := catalog.Season(id, snumber)
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	context := struct {
 		Title  string

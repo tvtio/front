@@ -23,6 +23,8 @@ func Search(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	results, err := catalog.SearchMulti(url.QueryEscape(query))
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	context := struct {
 		Title   string
