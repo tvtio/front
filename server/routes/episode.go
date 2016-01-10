@@ -22,16 +22,22 @@ func Episode(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	tv, err := catalog.TV(id)
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	snumber := params.ByName("snumber")
 	season, err := catalog.Season(id, snumber)
 	if err != nil {
 		logger.New("default").Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	enumber := params.ByName("enumber")
 	episode, err := catalog.Episode(id, snumber, enumber)
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	context := struct {
 		Title   string

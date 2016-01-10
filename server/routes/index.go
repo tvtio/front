@@ -22,12 +22,16 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	popularMovies, err := catalog.PopularMovies()
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 
 	// Get popular tv
 	popularTV, err := catalog.PopularTV()
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 
 	// Build template

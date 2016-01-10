@@ -25,6 +25,8 @@ func Terms(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	)
 	if err != nil {
 		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	context := struct {
 		Title string

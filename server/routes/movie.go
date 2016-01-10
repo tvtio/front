@@ -9,7 +9,6 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/mgutz/ansi"
 	"github.com/repejota/logger"
 	"github.com/tvtio/front/catalog"
 	"github.com/tvtio/tmdb"
@@ -22,7 +21,9 @@ func Movie(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	id := ps.ByName("id")
 	movie, err := catalog.Movie(id)
 	if err != nil {
-		l.Errorf(ansi.Color("FATAL: ", "red"), err)
+		l.Errorf(err.Error())
+		http.Error(w, "HTTP 500 : Internal Server Error", 500)
+		return
 	}
 	context := struct {
 		Title string
