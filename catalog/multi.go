@@ -28,7 +28,7 @@ func SearchMulti(query string) (result tmdb.SearchMultiResult, err error) {
 		return result, err
 	}
 
-	// Query to the backend
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.SearchMulti(query)
 	if err != nil {
 		return result, err

@@ -28,6 +28,7 @@ func Episode(id string, snumber string, enumber string) (result tmdb.Episode, er
 		return result, err
 	}
 
+	tmdb := tmdb.NewTMDB()
 	result, err = tmdb.GetEpisode(id, snumber, enumber)
 	if err != nil {
 		return result, err
