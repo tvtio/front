@@ -25,7 +25,7 @@ func Person(id string) (result tmdb.Person, err error) {
 		return result, err
 	}
 
-	tmdb := tmdb.NewTMDB()
+	tmdb := tmdb.New()
 	result, err = tmdb.GetPerson(id)
 	if err != nil {
 		return result, err

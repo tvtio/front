@@ -25,7 +25,7 @@ func Season(id string, snumber string) (result tmdb.Season, err error) {
 		return result, err
 	}
 
-	tmdb := tmdb.NewTMDB()
+	tmdb := tmdb.New()
 	result, err = tmdb.GetSeason(id, snumber)
 	if err != nil {
 		return result, err
