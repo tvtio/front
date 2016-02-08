@@ -1,0 +1,43 @@
+body {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 15.33pt;
+}
+
+h1 {
+  font-size: 33.33pt;
+  font-weight: bold;
+}
+
+h1 small {
+  font-size: 15.33pt;
+}
+
+.navbar {
+  padding: 20px 0;
+  font-size: 16.33pt;
+  margin-bottom: 0;
+  border: 0;
+}
+
+.navbar-brand {
+  font-size: 25.33pt;
+}
+
+.slideshow {
+  padding: 50px 0;
+  background-color: #f26a4b;
+  color: #fff;
+}
+.slideshow small {
+  color: #fff;
+}
+
+.services {
+  padding: 50px 0;
+}
+
+footer {
+  padding: 50px 0;
+  background-color: #31373e;
+  color: #b1b9c3;
+}

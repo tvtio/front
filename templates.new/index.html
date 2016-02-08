@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/img/favicon.png">
+  <title>tvt.io : {{.Title}}</title>
+  {{template "css"}}
+</head>
+
+<body>
+
+  <!-- Nav bar -->
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span>tvt.io</span></a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="#"><i class="fa fa-home"></i> Home</a>
+          </li>
+          <li>
+            <a href="/movies"><i class="fa fa-film"></i> Movies</a>
+          </li>
+          <li>
+            <a href="/tvshows"><i class="fa fa-television"></i> TVShows</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slideshow -->
+  <div class="section slideshow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>News! Watch now, Gravity.</h1>
+          <h1>
+            <small>Gravity is a 2013 science fiction film directed, co-wrote, co-edited and
+            co-produced by Alfonso Cuarón, who starring Sandra Bullock and George Clooney.</small>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <i class="fa fa-5x fa-laptop"></i>
+          <hr>
+          <h2>Multiple Devices</h2>
+          <p>Cinemapp is available for all devices. Computers, tablets and phones. Stay with us, wherever you are.</p>
+          <hr>
+          <button type="button" class="btn btn-primary btn-lg">Read more...</button>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fa fa-5x fa-th-list"></i>
+          <hr>
+          <h2>Huge Catalog</h2>
+          <p>Search, watch, follow and track thousands of Movies or TVShows, from tvt.io.</p>
+          <hr>
+          <button type="button" class="btn btn-primary btn-lg">Read more...</button>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fa fa-5x fa-heart"></i>
+          <hr>
+          <h2>Create your Collection</h2>
+          <p>Create a collection, follow your favorite shows and get notified when a new episode is aired.</p>
+          <hr>
+          <button type="button" class="btn btn-primary btn-lg">Read more...</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Movies -->
+  <div class="movies container-fluid">
+    movies
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TVShows -->
+  <div class="tvshows container-fluid">
+    tvshows
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  {{template "footer"}}
+  {{template "javascript"}}
+</body>
+
+</html>
