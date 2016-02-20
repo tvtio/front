@@ -6,6 +6,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/codegangsta/negroni"
 	"github.com/goincremental/negroni-sessions"
@@ -18,6 +19,7 @@ import (
 // Start starts the HTTP Server of the application
 // * Define the routes
 // * Setup middleware engine
+//
 func Start() error {
 	l := logger.New("default")
 
@@ -46,9 +48,9 @@ func Start() error {
 	router.GET("/terms", routes.Terms)
 	router.GET("/support", routes.Support)
 
-	router.ServeFiles("/css/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/css"))
-	router.ServeFiles("/js/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/js"))
-	router.ServeFiles("/img/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/img"))
+	router.ServeFiles("/css/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/css"))
+	router.ServeFiles("/js/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/js"))
+	router.ServeFiles("/img/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/img"))
 
 	// Apply middleware to the router
 	middle.UseHandler(router)
