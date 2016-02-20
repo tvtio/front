@@ -22,7 +22,7 @@ tvt.io project front-end repository
 ## Documentation
 
 Please check the whole Project Documentation repo at:
-[logger documentation](https://github.com/tvtio/front)
+[tvt.io documentation](https://github.com/tvtio/front)
 
 ### Installation
 
