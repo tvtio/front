@@ -4,5 +4,7 @@
 
 package catalog
 
+import "os"
+
 // CachePath is where the caché is stored on the system.
-const CachePath = "/cache"
+var CachePath = os.Getenv("CACHEPATH")

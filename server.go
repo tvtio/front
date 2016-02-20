@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
@@ -52,8 +51,6 @@ func Start() error {
 	router.ServeFiles("/css/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/css"))
 	router.ServeFiles("/js/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/js"))
 	router.ServeFiles("/img/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/img"))
-
-	fmt.Println(os.Getenv("TEMPLATEPATH") + "/css")
 
 	// Apply middleware to the router
 	middle.UseHandler(router)
