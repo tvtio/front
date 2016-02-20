@@ -18,6 +18,7 @@ import (
 // Start starts the HTTP Server of the application
 // * Define the routes
 // * Setup middleware engine
+//
 func Start() error {
 	l := logger.New("default")
 
