@@ -25,7 +25,7 @@ func TV(id string) (result tmdb.TV, err error) {
 		return result, err
 	}
 
-	tmdb := tmdb.NewTMDB()
+	tmdb := tmdb.New()
 	result, err = tmdb.GetTV(id)
 	if err != nil {
 		return result, err
@@ -49,7 +49,7 @@ func PopularTV() (result tmdb.SearchTVResult, err error) {
 		return result, err
 	}
 
-	tmdb := tmdb.NewTMDB()
+	tmdb := tmdb.New()
 	result, err = tmdb.PopularTV()
 	if err != nil {
 		return result, err
