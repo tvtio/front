@@ -5,7 +5,9 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/codegangsta/negroni"
 	"github.com/goincremental/negroni-sessions"
@@ -47,9 +49,11 @@ func Start() error {
 	router.GET("/terms", routes.Terms)
 	router.GET("/support", routes.Support)
 
-	router.ServeFiles("/css/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/css"))
-	router.ServeFiles("/js/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/js"))
-	router.ServeFiles("/img/*filepath", http.Dir("/go/src/github.com/tvtio/front/templates/img"))
+	router.ServeFiles("/css/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/css"))
+	router.ServeFiles("/js/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/js"))
+	router.ServeFiles("/img/*filepath", http.Dir(os.Getenv("TEMPLATEPATH")+"/img"))
+
+	fmt.Println(os.Getenv("TEMPLATEPATH") + "/css")
 
 	// Apply middleware to the router
 	middle.UseHandler(router)
